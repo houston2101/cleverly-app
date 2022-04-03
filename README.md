@@ -1,0 +1,2 @@
+# cleverly-app
+diploma project
