@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import {Global, ThemeProvider} from '@emotion/react'
+import SiteRouter from './routes'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import fontLexend from './styles/fontLexend'
+import modernNormalize from './styles/modernNormalize'
+import reboot from './styles/reboot'
+import theme from './theme'
 
-export default App;
+const App = () => (
+	<ThemeProvider theme={theme}>
+		<Global styles={[fontLexend, modernNormalize, reboot]} />
+		<div>
+			<SiteRouter />
+		</div>
+	</ThemeProvider>
+)
+
+export default App
