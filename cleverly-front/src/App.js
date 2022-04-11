@@ -5,13 +5,14 @@ import fontLexend from './styles/fontLexend'
 import modernNormalize from './styles/modernNormalize'
 import reboot from './styles/reboot'
 import theme from './theme'
+import Layout from './components/Layout'
 
 const App = () => (
 	<ThemeProvider theme={theme}>
 		<Global styles={[fontLexend, modernNormalize, reboot]} />
-		<div>
+		<Layout>
 			<SiteRouter />
-		</div>
+		</Layout>
 	</ThemeProvider>
 )
 
