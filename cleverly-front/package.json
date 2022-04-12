@@ -35,5 +35,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@emotion/babel-plugin": "^11.9.2",
+    "babel": "^6.23.0",
+    "babel-eslint": "^10.1.0"
   }
 }

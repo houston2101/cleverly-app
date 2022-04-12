@@ -1,14 +1,9 @@
-import {css} from '@emotion/react'
 import styled from '@emotion/styled'
-
-const dynamicStyle = ({variant}) => css`
-	${variant === 'main' && 'min-height: 100vh;'}
-`
 
 const Container = styled.div`
 	width: 100%;
 
-	${({theme}) => theme.breakpoints.between('sm', 'md')} {
+	${({theme}) => theme.breakpoints.down('md')} {
 		padding: 0 20px;
 	}
 
@@ -24,8 +19,6 @@ const Container = styled.div`
 		padding: 0 80px;
 		max-width: 1920px;
 	}
-
-	${dynamicStyle}
 `
 
 export default Container

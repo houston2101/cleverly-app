@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 
 const FooterWrapper = styled.footer`
 	background-color: ${({theme}) => theme.palette.background.primary};
+	box-shadow: 0px -3px 4px 0px #00000040;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		padding: 18px 0;
