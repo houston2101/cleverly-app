@@ -8,7 +8,7 @@ const WarningModalWrapper = styled.div`
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 3;
-	max-width: 325px;
+	width: fit-content;
 	padding: 10px;
 	align-items: center;
 	justify-content: center;

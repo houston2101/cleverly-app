@@ -7,7 +7,8 @@ import {
 	LoginPage,
 	CategoryPage,
 	CategoriesPage,
-	AllResultsPage
+	AllResultsPage,
+	VerificationPage
 } from './pages'
 
 const SiteRouter = () => (
@@ -20,6 +21,7 @@ const SiteRouter = () => (
 		<Route path='/results/:id' element={<TestResultPage />} />
 		<Route path='/categories/:id' element={<CategoryPage />} />
 		<Route path='/:id' element={<QuestionaryPage />} />
+		<Route path='/verification' element={<VerificationPage />} />
 	</Routes>
 )
 
