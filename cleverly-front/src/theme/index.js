@@ -54,6 +54,15 @@ const theme = {
 		circle: '50%'
 	},
 
+	boxShadow: {
+		header: '0px 10px 25px rgba(51, 51, 51, 0.4)',
+		footer: '0px -3px 4px rgba(0, 0, 0, 0.25)',
+		base: '0px 0px 10px 2px rgba(51, 51, 51, 0.35)',
+		marker: '3px 3px 5px rgba(51, 51, 51, 0.5)',
+		answer: '0px 0px 5px 2px rgba(51, 51, 51, 0.4)',
+		icon: '3px 3px 10px rgba(51, 51, 51, 0.5)'
+	},
+
 	typography: {
 		...typography,
 		fontFamilyLexend: `Lexend, ${typography.fontFamily}`

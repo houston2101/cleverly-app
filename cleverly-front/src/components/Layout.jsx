@@ -11,6 +11,13 @@ const Layout = ({children}) => (
 )
 
 const Main = styled.main`
+	display: flex;
+	flex-direction: column;
+	background-color: ${({theme}) => theme.palette.background.primary};
+	position: relative;
+	padding-top: 50px;
+	padding-bottom: 50px;
+
 	${({theme}) => theme.breakpoints.down('md')} {
 		min-height: calc(100vh - 50px);
 	}
