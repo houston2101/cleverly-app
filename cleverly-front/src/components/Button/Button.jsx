@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 const Button = styled.button`
 	background-color: ${({theme}) => theme.palette.accent.lightBlue};
 	border-radius: ${({theme}) => theme.borderRadius.md};
-	padding: 15px 90px;
 	box-shadow: ${({theme}) => theme.boxShadow.icon};
 	z-index: 1;
 	position: relative;
@@ -15,7 +14,7 @@ const Button = styled.button`
 		display: block;
 		position: absolute;
 		border-radius: 50%;
-		width: 500px;
+		width: 200%;
 		height: 500px;
 		background-color: ${({theme}) => theme.palette.primary};
 		right: 0;
@@ -32,6 +31,15 @@ const Button = styled.button`
 	&:hover::after {
 		transform: translate(30%, -50%);
 		transition: 0.8s ease-in-out;
+	}
+
+	${({theme}) => theme.breakpoints.down('md')} {
+		max-width: 270px;
+		padding: 15px 70px;
+	}
+
+	${({theme}) => theme.breakpoints.up('md')} {
+		padding: 15px 90px;
 	}
 `
 

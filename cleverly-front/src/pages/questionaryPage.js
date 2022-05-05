@@ -1,3 +1,5 @@
-const QuestionaryPage = () => <h1>Questions</h1>
+import Questionary from '../sections/Questionary'
+
+const QuestionaryPage = () => <Questionary />
 
 export default QuestionaryPage

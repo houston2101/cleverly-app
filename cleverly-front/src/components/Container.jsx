@@ -18,6 +18,7 @@ const Container = styled.div`
 	${({theme}) => theme.breakpoints.up('2xl')} {
 		padding: 0 80px;
 		max-width: 1920px;
+		margin: 0 auto;
 	}
 `
 
