@@ -28,10 +28,6 @@ const UserScoreTableWrapper = styled.div`
 			right: 100px;
 		}
 	}
-
-	${({theme}) => theme.breakpoints.down('md')} {
-		max-width: 750px;
-	}
 `
 
 export default UserScoreTableWrapper

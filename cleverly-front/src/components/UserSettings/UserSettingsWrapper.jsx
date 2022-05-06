@@ -6,15 +6,18 @@ const UserSettingsWrapper = styled.div`
 	background-color: ${({theme}) => theme.palette.background.secondary};
 	box-shadow: ${({theme}) => theme.boxShadow.base};
 	border-radius: ${({theme}) => theme.borderRadius.md};
+	width: 100%;
 
-	${({theme}) => theme.breakpoints.down('md')} {
-		width: 100%;
+	${({theme}) => theme.breakpoints.down('lg')} {
 		padding: 20px;
 	}
 
 	${({theme}) => theme.breakpoints.up('md')} {
-		max-width: 750px;
 		padding: 66px;
+	}
+
+	${({theme}) => theme.breakpoints.up('lg')} {
+		max-width: 750px;
 	}
 `
 

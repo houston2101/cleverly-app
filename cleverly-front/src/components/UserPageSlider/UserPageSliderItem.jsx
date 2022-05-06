@@ -1,16 +1,18 @@
 import styled from '@emotion/styled'
 
-const UserPageWrapper = styled.div`
+const UserPageSliderItem = styled.div`
 	display: flex;
+	align-items: center;
 	flex-direction: column;
+	gap: 10px;
 
 	${({theme}) => theme.breakpoints.down('lg')} {
-		gap: 16px;
+		width: 100%;
 	}
 
 	${({theme}) => theme.breakpoints.up('lg')} {
-		gap: 78px;
+		max-width: 170px;
 	}
 `
 
-export default UserPageWrapper
+export default UserPageSliderItem
