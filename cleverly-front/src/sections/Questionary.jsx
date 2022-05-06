@@ -1,5 +1,6 @@
 import Button from '../components/Button/Button'
 import ButtonText from '../components/Button/ButtonText'
+import QuestionaryWrapper from '../components/Questionary/QuestionaryWrapper'
 
 const Questionary = () => {
 	return (

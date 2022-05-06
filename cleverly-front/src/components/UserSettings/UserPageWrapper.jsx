@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const UserPageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	position: relative;
 
 	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 16px;
@@ -15,10 +15,12 @@ const UserPageWrapper = styled.div`
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		align-items: center;
+		width: 100%;
 	}
 
 	${({theme}) => theme.breakpoints.up('xl')} {
 		align-items: flex-start;
+		width: 50%;
 	}
 `
 

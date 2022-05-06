@@ -7,6 +7,7 @@ const UserScoreTableWrapper = styled.div`
 	border-radius: ${({theme}) => theme.borderRadius.md};
 	box-shadow: ${({theme}) => theme.boxShadow.base};
 	width: 100%;
+	max-width: 797px;
 	overflow: hidden;
 	background-color: ${({theme}) => theme.palette.background.secondary};
 

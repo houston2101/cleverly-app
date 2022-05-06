@@ -19,15 +19,15 @@ const UserPageStack = styled(Swiper)`
 	position: static;
 
 	${({theme}) => theme.breakpoints.down('md')} {
-		padding: 0 10px 50px 10px;
+		padding: 10px 10px 50px 10px;
 	}
 
 	${({theme}) => theme.breakpoints.between('md', 'lg')} {
-		padding: 0 0 50px 0;
+		padding: 10px 0 50px 0;
 	}
 
 	${({theme}) => theme.breakpoints.up('lg')} {
-		padding: 0 10px 50px 10px;
+		padding: 10px 10px 50px 10px;
 	}
 
 	& .swiper-slide {
@@ -91,14 +91,14 @@ const UserPageSlider = () => {
 				spaceBetween={20}
 				slidesPerView='auto'
 				loop={true}
+				centeredSlides='true'
 				breakpoints={{
-					1536: {
-						slidesPerView: 4,
-						spaceBetween: 27
-					},
-
 					768: {
 						spaceBetween: 25
+					},
+
+					1536: {
+						spaceBetween: 27
 					}
 				}}
 				navigation

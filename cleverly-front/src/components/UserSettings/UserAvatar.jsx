@@ -16,7 +16,12 @@ const UserAvatar = styled.img`
 		height: 70px;
 	}
 
-	${({theme}) => theme.breakpoints.up('lg')} {
+	${({theme}) => theme.breakpoints.between('lg', '2xl')} {
+		width: 80px;
+		height: 80px;
+	}
+
+	${({theme}) => theme.breakpoints.up('2xl')} {
 		width: 125px;
 		height: 125px;
 	}

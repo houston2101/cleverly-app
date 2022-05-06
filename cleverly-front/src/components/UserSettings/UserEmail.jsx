@@ -12,7 +12,11 @@ const UserEmail = styled.span`
 		font-size: 16px;
 	}
 
-	${({theme}) => theme.breakpoints.up('lg')} {
+	${({theme}) => theme.breakpoints.between('lg', '2xl')} {
+		font-size: 20px;
+	}
+
+	${({theme}) => theme.breakpoints.up('2xl')} {
 		font-size: 24px;
 	}
 `

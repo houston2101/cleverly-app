@@ -8,12 +8,12 @@ const PasswordSettingsContent = styled.div`
 
 	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 40px;
-		padding: 40px 0;
+		padding: 40px 0 68px 0;
 	}
 
 	${({theme}) => theme.breakpoints.up('lg')} {
 		gap: 30px;
-		padding: 50px 0;
+		padding: 50px 0 68px 0;
 	}
 `
 

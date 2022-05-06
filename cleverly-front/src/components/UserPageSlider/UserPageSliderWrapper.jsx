@@ -8,30 +8,15 @@ const UserPageSliderWrapper = styled.div`
 	align-items: center;
 	flex-direction: column;
 	position: relative;
+	width: 100%;
+	max-width: 840px;
 
 	${({theme}) => theme.breakpoints.down('sm')} {
-		max-width: 335px;
 		padding: 20px;
 	}
 
 	${({theme}) => theme.breakpoints.up('sm')} {
 		padding: 30px;
-	}
-
-	${({theme}) => theme.breakpoints.between('sm', 'md')} {
-		max-width: 350px;
-	}
-
-	${({theme}) => theme.breakpoints.between('md', 'lg')} {
-		max-width: 500px;
-	}
-
-	${({theme}) => theme.breakpoints.between('lg', '2xl')} {
-		max-width: 640px;
-	}
-
-	${({theme}) => theme.breakpoints.between('2xl', '3xl')} {
-		max-width: 740px;
 	}
 
 	${({theme}) => theme.breakpoints.up('3xl')} {

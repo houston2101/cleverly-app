@@ -13,7 +13,11 @@ const UserName = styled.span`
 		padding-bottom: 2px;
 	}
 
-	${({theme}) => theme.breakpoints.up('lg')} {
+	${({theme}) => theme.breakpoints.between('lg', '2xl')} {
+		font-size: 32px;
+	}
+
+	${({theme}) => theme.breakpoints.up('2xl')} {
 		font-size: 40px;
 		width: calc(100% - 80px);
 	}
