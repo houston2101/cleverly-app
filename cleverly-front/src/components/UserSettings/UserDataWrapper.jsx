@@ -7,11 +7,11 @@ const UserDataWrapper = styled.div`
 	justify-content: space-between;
 	overflow: hidden;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 3px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		gap: 5px;
 	}
 `

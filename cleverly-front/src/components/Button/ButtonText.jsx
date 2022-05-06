@@ -5,11 +5,11 @@ const ButtonText = styled.span`
 	font-family: ${({theme}) => theme.typography.fontFamilyLexend};
 	z-index: 3;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		font-size: 14px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		font-size: 18px;
 	}
 `

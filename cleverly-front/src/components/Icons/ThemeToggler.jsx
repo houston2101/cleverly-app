@@ -7,12 +7,12 @@ const dynamicStyles = ({theme, isLight}) => css`
 		: `
 
 		.switch {
-			${theme.breakpoints.down('md')} {
+			${theme.breakpoints.down('lg')} {
 				width: 36px;
 				height: 36px;
 			}
 
-			${theme.breakpoints.up('md')} {
+			${theme.breakpoints.up('lg')} {
 				width: 56px;
 				height: 56px;
 			}
@@ -55,12 +55,12 @@ const Component = styled.button`
 	border-radius: 50%;
 	overflow: hidden;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		width: 60px;
 		height: 60px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		width: 80px;
 		height: 80px;
 	}
@@ -71,12 +71,12 @@ const Component = styled.button`
 		top: 0;
 		transition: all ease-out 0.3s;
 
-		${({theme}) => theme.breakpoints.down('md')} {
+		${({theme}) => theme.breakpoints.down('lg')} {
 			width: 26px;
 			height: 26px;
 		}
 
-		${({theme}) => theme.breakpoints.up('md')} {
+		${({theme}) => theme.breakpoints.up('lg')} {
 			width: 36px;
 			height: 36px;
 		}
@@ -116,11 +116,11 @@ const Component = styled.button`
 			background: ${({theme}) => theme.palette.primary};
 			transition: all ease-in 0.3s;
 
-			${({theme}) => theme.breakpoints.down('md')} {
+			${({theme}) => theme.breakpoints.down('lg')} {
 				border: 4px solid ${({theme}) => theme.palette.accent.lightBlue};
 			}
 
-			${({theme}) => theme.breakpoints.up('md')} {
+			${({theme}) => theme.breakpoints.up('lg')} {
 				border: 5px solid ${({theme}) => theme.palette.accent.lightBlue};
 			}
 		}

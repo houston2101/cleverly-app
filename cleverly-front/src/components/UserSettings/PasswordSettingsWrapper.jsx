@@ -6,7 +6,7 @@ const dynamicStyles = ({isOpen}) => css`
 `
 
 const PasswordSettingsWrapper = styled.div`
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		overflow: hidden;
 		transition: 0.5s ease-in-out;
 		${dynamicStyles}

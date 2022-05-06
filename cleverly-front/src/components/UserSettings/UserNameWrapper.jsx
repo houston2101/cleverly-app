@@ -7,11 +7,11 @@ const UserNameWrapper = styled.div`
 	overflow: hidden;
 	width: 100%;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 5px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		gap: 10px;
 	}
 `

@@ -6,12 +6,12 @@ const SettingsInputWrapper = styled.div`
 	align-items: center;
 	width: 100%;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 15px;
 		padding: 0 10px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		gap: 20px;
 	}
 `

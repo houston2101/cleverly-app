@@ -7,13 +7,13 @@ const EditUserNameIcon = styled(EditIcon)`
 		cursor: pointer;
 	}
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		width: 25px;
 		height: 25px;
 		padding: 5px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		width: 32px;
 		height: 32px;
 		padding: 5px;

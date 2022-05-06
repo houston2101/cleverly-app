@@ -11,7 +11,7 @@ const dynamicStyles = ({isOpen}) => css`
 `
 
 const UserSettingsIcon = styled(SettingsIcon)`
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		width: 40px;
 		height: 40px;
 		padding: 10px;
@@ -27,7 +27,7 @@ const UserSettingsIcon = styled(SettingsIcon)`
 		cursor: pointer;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		display: none;
 	}
 `

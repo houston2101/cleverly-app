@@ -18,6 +18,14 @@ const UserPageSliderWrapper = styled.div`
 		padding: 30px;
 	}
 
+	${({theme}) => theme.breakpoints.between('sm', 'md')} {
+		max-width: 350px;
+	}
+
+	${({theme}) => theme.breakpoints.between('md', 'lg')} {
+		max-width: 500px;
+	}
+
 	${({theme}) => theme.breakpoints.between('lg', '2xl')} {
 		max-width: 640px;
 	}

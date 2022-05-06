@@ -10,12 +10,12 @@ const UserResultTestName = styled.span`
 	overflow: hidden;
 	width: 100%;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		font-size: 16px;
 		padding: 7px 13px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		font-size: 24px;
 		padding: 11px 40px;
 	}

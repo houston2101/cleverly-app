@@ -12,11 +12,8 @@ const UserSettingsWrapper = styled.div`
 		padding: 20px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
-		padding: 66px;
-	}
-
 	${({theme}) => theme.breakpoints.up('lg')} {
+		padding: 66px;
 		max-width: 750px;
 	}
 `

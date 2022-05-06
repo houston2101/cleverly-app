@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const UserResultItem = styled.div`
 	display: grid;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		grid-template-columns: 35px auto 72px;
 		grid-grid-template-rows: 80px;
 
@@ -16,7 +16,7 @@ const UserResultItem = styled.div`
 		}
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		grid-template-columns: 90px auto 100px;
 		grid-grid-template-rows: 168px;
 

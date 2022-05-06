@@ -8,11 +8,11 @@ const UserEmail = styled.span`
 	width: 100%;
 	padding-bottom: 5px;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		font-size: 16px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		font-size: 24px;
 	}
 `

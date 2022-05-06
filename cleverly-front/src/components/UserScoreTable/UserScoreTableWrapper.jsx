@@ -22,6 +22,7 @@ const UserScoreTableWrapper = styled.div`
 
 		${({theme}) => theme.breakpoints.down('md')} {
 			right: 72px;
+			max-width: 670px;
 		}
 
 		${({theme}) => theme.breakpoints.up('md')} {

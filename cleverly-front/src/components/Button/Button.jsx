@@ -33,12 +33,12 @@ const Button = styled.button`
 		transition: 0.8s ease-in-out;
 	}
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		max-width: 270px;
 		padding: 15px 70px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		padding: 15px 90px;
 	}
 `

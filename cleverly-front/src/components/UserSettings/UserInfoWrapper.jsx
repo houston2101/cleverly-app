@@ -6,11 +6,11 @@ const UserInfoWrapper = styled.div`
 	align-items: center;
 	position: relative;
 
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('lg')} {
 		gap: 17px;
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('lg')} {
 		gap: 25px;
 	}
 `
