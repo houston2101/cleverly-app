@@ -1,3 +1,12 @@
-const AllResultsPage = () => <h1>All results</h1>
+import AllResults from '../sections/AllResults'
+import Container from '../components/Container'
+
+const AllResultsPage = () => {
+	return (
+		<Container>
+			<AllResults />
+		</Container>
+	)
+}
 
 export default AllResultsPage

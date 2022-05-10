@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
+import Container from '../Container'
 
-const QuestionaryWrapper = styled.div`
+const QuestionaryWrapper = styled(Container)`
 	display: flex;
-	overflow: hidden;
+	gap: 70px;
 `
 
 export default QuestionaryWrapper

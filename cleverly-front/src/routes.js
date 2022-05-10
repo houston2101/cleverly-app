@@ -20,7 +20,7 @@ const SiteRouter = () => (
 		<Route path='/results' element={<AllResultsPage />} />
 		<Route path='/results/:id' element={<TestResultPage />} />
 		<Route path='/categories/:id' element={<CategoryPage />} />
-		<Route path='/:id' element={<QuestionaryPage />} />
+		<Route path='/test/:id' element={<QuestionaryPage />} />
 		<Route path='/verification' element={<VerificationPage />} />
 	</Routes>
 )

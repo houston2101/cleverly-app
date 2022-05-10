@@ -1,4 +1,14 @@
 import styled from '@emotion/styled'
+import {css} from '@emotion/react'
+
+const dynamicStyles = ({disabled}) => css`
+	${disabled
+		? `
+pointer-events: none;
+filter: grayscale(100%);
+`
+		: ''}
+`
 
 const Button = styled.button`
 	background-color: ${({theme}) => theme.palette.accent.lightBlue};
@@ -41,6 +51,8 @@ const Button = styled.button`
 	${({theme}) => theme.breakpoints.up('lg')} {
 		padding: 15px 90px;
 	}
+
+	${dynamicStyles}
 `
 
 export default Button

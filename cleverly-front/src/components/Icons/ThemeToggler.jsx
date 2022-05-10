@@ -160,6 +160,7 @@ const Component = styled.button`
 				&::before {
 					transform: translate(-50%, -50%) rotate(90deg);
 				}
+
 				&::after {
 					transform: translate(-50%, -50%) rotate(135deg);
 				}

@@ -49,6 +49,7 @@ const theme = {
 	},
 
 	borderRadius: {
+		xsm: '5px',
 		sm: '10px',
 		md: '15px',
 		circle: '50%'
@@ -60,7 +61,8 @@ const theme = {
 		base: '0px 0px 10px 2px rgba(51, 51, 51, 0.35)',
 		marker: '3px 3px 5px rgba(51, 51, 51, 0.5)',
 		answer: '0px 0px 5px 2px rgba(51, 51, 51, 0.4)',
-		icon: '3px 3px 10px rgba(51, 51, 51, 0.5)'
+		icon: '3px 3px 10px rgba(51, 51, 51, 0.5)',
+		asideButton: '-8px 0px 10px rgba(51, 51, 51, 0.3)'
 	},
 
 	typography: {

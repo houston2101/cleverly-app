@@ -7,16 +7,24 @@ import categoriesData from '../data/en/categoriesData'
 
 const CategoriesPage = () => {
 	const {sectionTitle, categories} = categoriesData
+	const isAdmin = false
 	return (
 		<PageGrid
 			title={sectionTitle}
-			content={categories.map(({title, link, image}) => (
-				<CategoryCardWrapper key={title}>
-					<CategoryCardTitle>{title}</CategoryCardTitle>
-					{image && <CategoryCardImage src={image} />}
-					<CategoryCardLink to={link} />
-				</CategoryCardWrapper>
-			))}
+			content={[
+				isAdmin ? (
+					<CategoryCardWrapper>
+						<CategoryCardTitle>Admin</CategoryCardTitle>
+					</CategoryCardWrapper>
+				) : null,
+				...categories.map(({title, link, image}) => (
+					<CategoryCardWrapper key={title}>
+						<CategoryCardTitle>{title}</CategoryCardTitle>
+						{image && <CategoryCardImage src={image} />}
+						<CategoryCardLink to={link} />
+					</CategoryCardWrapper>
+				))
+			]}
 		/>
 	)
 }

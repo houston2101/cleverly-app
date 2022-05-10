@@ -1,6 +1,6 @@
 import {css} from '@emotion/react'
 
-const pathToFont = './fonts/'
+const pathToFont = '../fonts/'
 
 const fontLexend = css`
 	@font-face {
