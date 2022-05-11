@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const QuestionaryModalButtonItem = styled.span`
 	content: '';
 	display: block;
-	width: 30px;
+	width: 20px;
 	height: 2px;
 	background-color: ${({theme}) => theme.palette.text.primary};
 
@@ -12,7 +12,7 @@ const QuestionaryModalButtonItem = styled.span`
 		position: relative;
 		content: '';
 		display: block;
-		width: 30px;
+		width: 20px;
 		height: 2px;
 		background-color: ${({theme}) => theme.palette.text.primary};
 	}

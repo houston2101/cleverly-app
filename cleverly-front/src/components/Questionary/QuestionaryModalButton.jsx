@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 
 const QuestionaryModalButton = styled.button`
-	${({theme}) => theme.breakpoints.down('md')} {
+	${({theme}) => theme.breakpoints.down('xl')} {
 		display: block;
-		width: 50px;
-		height: 40px;
-		padding: 19px 10px;
+		width: 40px;
+		height: 20px;
+		padding: 15px 8px;
 		position: absolute;
 		left: 0;
 		transform: translateX(-100%);
@@ -15,7 +15,7 @@ const QuestionaryModalButton = styled.button`
 		background-color: ${({theme}) => theme.palette.background.secondary};
 	}
 
-	${({theme}) => theme.breakpoints.up('md')} {
+	${({theme}) => theme.breakpoints.up('xl')} {
 		display: none;
 	}
 `

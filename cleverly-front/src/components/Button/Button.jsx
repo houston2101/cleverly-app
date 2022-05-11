@@ -1,13 +1,39 @@
 import styled from '@emotion/styled'
 import {css} from '@emotion/react'
 
-const dynamicStyles = ({disabled}) => css`
+const dynamicStyles = ({disabled, theme, dNone, dir}) => css`
 	${disabled
 		? `
 pointer-events: none;
 filter: grayscale(100%);
 `
 		: ''}
+	${dNone
+		? `
+		${theme.breakpoints.down('lg')} {
+			padding: 25px 35px;
+			span {
+				display: none;
+			}
+		}
+`
+		: ''}
+	${dir === 'left'
+		? `
+	div {
+		transform: rotate(180deg);
+
+	}
+	
+	&:hover > div {
+		animation: bouncingArrow 1.1s infinite linear reverse;
+	}
+	`
+		: `
+	&:hover > div {
+		animation: bouncingArrow 1.1s infinite linear;
+	}
+		`}
 `
 
 const Button = styled.button`
@@ -17,6 +43,32 @@ const Button = styled.button`
 	z-index: 1;
 	position: relative;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+
+	@keyframes bouncingArrow {
+		0% {
+			left: 0;
+		}
+
+		25% {
+			left: 3px;
+		}
+
+		50% {
+			left: 0px;
+		}
+
+		75% {
+			left: -3px;
+		}
+
+		100% {
+			left: 0px;
+		}
+	}
 
 	&::after {
 		content: '';
@@ -44,7 +96,6 @@ const Button = styled.button`
 	}
 
 	${({theme}) => theme.breakpoints.down('lg')} {
-		max-width: 270px;
 		padding: 15px 70px;
 	}
 

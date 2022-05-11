@@ -22,6 +22,8 @@ import QuestionaryModalStack from '../components/Questionary/QuestionaryModalSta
 import QuestionaryModalWrapper from '../components/Questionary/QuestionaryModalWrapper'
 import QuestionaryContentQuestionBottom from '../components/Questionary/QuestionaryContentQuestionBottom'
 import QuestionaryModalButtonItem from '../components/Questionary/QuestionaryModalButtonItem'
+import SendButtonWrapper from '../components/Questionary/SendButtonWrapper'
+import ButtonArrow from '../components/Button/ButtonArrow'
 
 const test = {
 	title: 'Large Math test',
@@ -218,6 +220,10 @@ const Questionary = () => {
 	React.useEffect(() => {
 		console.log(selectedAnswers)
 	}, [selectedAnswers])
+
+	const [isOpen, setIsOpen] = React.useState(false)
+	const handleIsOpen = () => setIsOpen(!isOpen)
+
 	return (
 		<QuestionaryWrapper>
 			<QuestionaryContent>
@@ -258,13 +264,17 @@ const Questionary = () => {
 					</QuestionaryContentQuestionStack>
 					<QuestionaryContentQuestionBottom>
 						<Button
+							dir='left'
+							dNone={true}
 							onClick={() =>
 								handleSelectQuestion(activeQuestion - 1)
 							}
 							disabled={activeQuestion === 0 || !test.allowEdit}>
+							<ButtonArrow />
 							<ButtonText>Previous question</ButtonText>
 						</Button>
 						<Button
+							dNone={true}
 							onClick={() =>
 								handleSelectQuestion(activeQuestion + 1)
 							}
@@ -272,6 +282,7 @@ const Questionary = () => {
 								activeQuestion === test.questions.length - 1
 							}>
 							<ButtonText>Next question</ButtonText>
+							<ButtonArrow />
 						</Button>
 					</QuestionaryContentQuestionBottom>
 				</QuestionaryContentQuestion>
@@ -279,8 +290,8 @@ const Questionary = () => {
 
 			<QuestionaryAside>
 				<QuestionaryTitle>Test Title</QuestionaryTitle>
-				<QuestionaryModal>
-					<QuestionaryModalButton>
+				<QuestionaryModal isOpen={isOpen}>
+					<QuestionaryModalButton onClick={handleIsOpen}>
 						<QuestionaryModalButtonItem />
 					</QuestionaryModalButton>
 					<QuestionaryModalContent>
@@ -314,9 +325,12 @@ const Questionary = () => {
 						</QuestionaryModalWrapper>
 					</QuestionaryModalContent>
 				</QuestionaryModal>
-				<Button onClick={handleFinishTest}>
-					<ButtonText>Finish and send results</ButtonText>
-				</Button>
+				<SendButtonWrapper>
+					<Button onClick={handleFinishTest}>
+						<ButtonText>Finish and send results</ButtonText>
+						<ButtonArrow />
+					</Button>
+				</SendButtonWrapper>
 			</QuestionaryAside>
 		</QuestionaryWrapper>
 	)

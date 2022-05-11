@@ -42,8 +42,6 @@ const dynamicStyles = ({
 `
 
 const QuestionaryModalItem = styled.div`
-	width: 60px;
-	height: 90px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -51,9 +49,21 @@ const QuestionaryModalItem = styled.div`
 	border-radius: ${({theme}) => theme.borderRadius.md};
 	font-family: ${({theme}) => theme.typography.fontFamilyLexend};
 	color: ${({theme}) => theme.palette.text.primary};
-	font-size: 18px;
 	line-height: 22px;
 	transition: 0.3s;
+
+	${({theme}) => theme.breakpoints.down('xl')} {
+		width: 40px;
+		height: 60px;
+		font-size: 14px;
+	}
+
+	${({theme}) => theme.breakpoints.up('xl')} {
+		width: 60px;
+		height: 90px;
+		font-size: 18px;
+	}
+
 	${dynamicStyles}
 `
 

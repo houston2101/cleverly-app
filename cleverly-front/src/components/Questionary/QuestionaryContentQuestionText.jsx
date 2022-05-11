@@ -8,6 +8,14 @@ const QuestionaryContentQuestionText = styled.p`
 	position: relative;
 	padding-bottom: 30px;
 
+	${({theme}) => theme.breakpoints.down('md')} {
+		font-size: 16px;
+	}
+
+	${({theme}) => theme.breakpoints.up('md')} {
+		font-size: 20px;
+	}
+
 	&::after {
 		content: '';
 		width: 50%;

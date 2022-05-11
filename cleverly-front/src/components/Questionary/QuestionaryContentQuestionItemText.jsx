@@ -6,6 +6,14 @@ const QuestionaryContentQuestionItemText = styled.div`
 	font-size: 16px;
 	line-height: 20px;
 	flex-grow: 1;
+
+	${({theme}) => theme.breakpoints.down('md')} {
+		font-size: 14px;
+	}
+
+	${({theme}) => theme.breakpoints.up('md')} {
+		font-size: 16px;
+	}
 `
 
 export default QuestionaryContentQuestionItemText
