@@ -7,6 +7,7 @@ import CategoryPage from './categoryPage'
 import CategoriesPage from './categoriesPage'
 import AllResultsPage from './allResultsPage'
 import VerificationPage from './verificationPage'
+import ConstructorPage from './constructorPage'
 
 export {
 	UserPage,
@@ -17,5 +18,6 @@ export {
 	CategoryPage,
 	CategoriesPage,
 	AllResultsPage,
-	VerificationPage
+	VerificationPage,
+	ConstructorPage
 }

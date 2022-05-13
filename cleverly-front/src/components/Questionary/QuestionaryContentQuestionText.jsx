@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-const QuestionaryContentQuestionText = styled.p`
+const QuestionaryContentQuestionText = styled.div`
 	font-family: ${({theme}) => theme.typography.fontFamilyLexend};
 	color: ${({theme}) => theme.palette.text.primary};
 	font-size: 20px;

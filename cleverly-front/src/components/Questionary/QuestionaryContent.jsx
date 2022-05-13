@@ -5,6 +5,7 @@ const QuestionaryContent = styled.div`
 	flex-direction: column;
 	width: 100%;
 	word-wrap: break-word;
+	gap: 35px;
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		order: 2;

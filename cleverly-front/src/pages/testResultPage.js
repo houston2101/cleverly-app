@@ -1,3 +1,5 @@
-const TestResultPage = () => <h1>Test result</h1>
+import TestResult from '../sections/TestResult'
+
+const TestResultPage = () => <TestResult />
 
 export default TestResultPage

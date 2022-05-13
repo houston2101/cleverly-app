@@ -1,10 +1,20 @@
 import styled from '@emotion/styled'
 import {css} from '@emotion/react'
 
-const dynamicStyle = ({theme, isSelected}) => css`
-	background-color: ${isSelected
-		? theme.palette.accent.lightBlue
-		: theme.palette.background.primary}; ;
+const dynamicStyle = ({theme, isSelected, isCorrect, isTestDone}) => css`
+	${isTestDone
+		? `
+		background-color: ${
+			isCorrect
+				? theme.palette.accent.lightGreen
+				: theme.palette.accent.lightRed
+		};
+	`
+		: `	background-color: ${
+				isSelected
+					? theme.palette.accent.lightBlue
+					: theme.palette.background.primary
+		  };`}
 `
 
 const QuestionaryContentQuestionItem = styled.div`
