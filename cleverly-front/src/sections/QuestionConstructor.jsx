@@ -1,5 +1,4 @@
-import QuestionaryWrapper from '../components/Questionary/QuestionaryWrapper'
-import QuestionaryContent from '../components/Questionary/QuestionaryContent'
+import React from 'react'
 import QuestionaryContentQuestion from '../components/Questionary/QuestionaryContentQuestion'
 import QuestionaryContentQuestionStack from '../components/Questionary/QuestionaryContentQuestionStack'
 import QuestionaryContentQuestionMark from '../components/Questionary/QuestionaryContentQuestionMark'
@@ -8,75 +7,74 @@ import QuestionaryContentQuestionItemIndex from '../components/Questionary/Quest
 import QuestionText from '../components/QuestionConstructor/QuestionText'
 import QuestionTextWrapper from '../components/QuestionConstructor/QuestionTextWrapper'
 import QuestionaryContentQuestionItemText from '../components/Questionary/QuestionaryContentQuestionItemText'
-import QuestionTextEditIcon from '../components/QuestionConstructor/QuestionTextEditIcon'
-import TextEditIcon from '../components/QuestionConstructor/TextEditIcon'
+import EditUserNameIcon from '../components/EditableTitle/EditTitleIcon'
 import AddAnswer from '../components/Icons/AddAnswer'
+import QuestionConstructorDeleteQuestion from '../components/QuestionConstructor/QuestionConstructorDeleteQuestion'
+import ModalCheckbox from '../components/ModalCheckbox/ModalCheckbox'
 
-const QuestionConstructor = () => {
+const MAXCOUNTOFQUESTIONS = 6
+
+const QuestionConstructor = ({
+	addNewAnswer,
+	currentQuestionNum,
+	currentQuestion,
+	changeQuestionText,
+	changeAnswerText,
+	changeAnswerStatus,
+	changeQuestionMultiSelect
+}) => {
 	return (
-		<QuestionaryWrapper>
-			<QuestionaryContent>
-				<QuestionaryContentQuestion>
-					<QuestionTextWrapper>
-						<QuestionText placeholder='Write your question here'></QuestionText>
-						<QuestionTextEditIcon>
-							<TextEditIcon />
-						</QuestionTextEditIcon>
-					</QuestionTextWrapper>
-					<QuestionaryContentQuestionStack>
-						<QuestionaryContentQuestionMark></QuestionaryContentQuestionMark>
-						<QuestionaryContentQuestionItem>
-							<QuestionaryContentQuestionItemIndex>
-								A
-							</QuestionaryContentQuestionItemIndex>
-							<QuestionaryContentQuestionItemText>
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Mauris dictum elit quis augue
-								fermentum egestas. Phasellus at consectetur
-								metus.
-							</QuestionaryContentQuestionItemText>
-						</QuestionaryContentQuestionItem>
-
-						<QuestionaryContentQuestionItem>
-							<QuestionaryContentQuestionItemIndex>
-								B
-							</QuestionaryContentQuestionItemIndex>
-							<QuestionaryContentQuestionItemText>
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Mauris dictum elit quis augue
-								fermentum egestas. Phasellus at consectetur
-								metus.
-							</QuestionaryContentQuestionItemText>
-						</QuestionaryContentQuestionItem>
-
-						<QuestionaryContentQuestionItem>
-							<QuestionaryContentQuestionItemIndex>
-								C
-							</QuestionaryContentQuestionItemIndex>
-							<QuestionaryContentQuestionItemText>
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Mauris dictum elit quis augue
-								fermentum egestas. Phasellus at consectetur
-								metus.
-							</QuestionaryContentQuestionItemText>
-						</QuestionaryContentQuestionItem>
-
-						<QuestionaryContentQuestionItem>
-							<QuestionaryContentQuestionItemIndex>
-								D
-							</QuestionaryContentQuestionItemIndex>
-							<QuestionaryContentQuestionItemText>
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Mauris dictum elit quis augue
-								fermentum egestas. Phasellus at consectetur
-								metus.
-							</QuestionaryContentQuestionItemText>
-						</QuestionaryContentQuestionItem>
-					</QuestionaryContentQuestionStack>
-					<AddAnswer />
-				</QuestionaryContentQuestion>
-			</QuestionaryContent>
-		</QuestionaryWrapper>
+		<QuestionaryContentQuestion>
+			<QuestionTextWrapper>
+				{currentQuestionNum + 1 + '.'}
+				<QuestionText
+					placeholder='Enter your question'
+					value={currentQuestion.text}
+					onChange={(e) => changeQuestionText(e, currentQuestion)}
+				/>
+				<EditUserNameIcon />
+			</QuestionTextWrapper>
+			<QuestionaryContentQuestionStack>
+				<ModalCheckbox
+					text='allow multi-select answers'
+					handler={(isCorrect) =>
+						changeQuestionMultiSelect(currentQuestion, isCorrect)
+					}
+					value={currentQuestion.allowMultiSelect}
+				/>
+				<QuestionaryContentQuestionMark />
+				{currentQuestion.answers.map(({index, text, isCorrect}) => (
+					<QuestionaryContentQuestionItem>
+						<QuestionaryContentQuestionItemIndex>
+							{index}
+						</QuestionaryContentQuestionItemIndex>
+						<QuestionaryContentQuestionItemText
+							as='input'
+							value={text}
+							placeholder='Enter your answer'
+							onChange={(e) =>
+								changeAnswerText(e, index, currentQuestion)
+							}
+						/>
+						<ModalCheckbox
+							text='correct'
+							handler={() =>
+								changeAnswerStatus(
+									index,
+									currentQuestion,
+									isCorrect
+								)
+							}
+							value={isCorrect}
+						/>
+						<QuestionConstructorDeleteQuestion />
+					</QuestionaryContentQuestionItem>
+				))}
+			</QuestionaryContentQuestionStack>
+			{currentQuestion.answers.length < MAXCOUNTOFQUESTIONS ? (
+				<AddAnswer onClick={() => addNewAnswer(currentQuestion)} />
+			) : null}
+		</QuestionaryContentQuestion>
 	)
 }
 

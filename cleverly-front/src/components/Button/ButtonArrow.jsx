@@ -5,14 +5,14 @@ const ButtonArrow = styled.div`
 	width: 28px;
 	height: 3px;
 	background-color: ${({theme}) => theme.palette.background.secondary};
-	border-radius: ${({theme}) => theme.borderRadius.xsm};
+	border-radius: ${({theme}) => theme.borderRadius.xxsm};
 
 	&:before,
 	&:after {
 		content: '';
 		display: block;
 		background-color: ${({theme}) => theme.palette.background.secondary};
-		border-radius: ${({theme}) => theme.borderRadius.xsm};
+		border-radius: ${({theme}) => theme.borderRadius.xxsm};
 		width: 16px;
 		height: 3px;
 		position: absolute;

@@ -15,7 +15,7 @@ const SettingsInput = styled(Input)`
 	}
 
 	&::placeholder {
-		padding-left: 0px;
+		padding-left: 0;
 	}
 `
 

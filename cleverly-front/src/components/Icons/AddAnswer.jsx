@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 const AddAnswer = styled.button`
 	border-radius: ${({theme}) => theme.borderRadius.circle};
 	box-shadow: ${({theme}) => theme.boxShadow.answer};
+	display: block;
+	margin: 0 auto;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		width: 36px;
@@ -19,7 +21,7 @@ const AddAnswer = styled.button`
 		content: '';
 		display: block;
 		background-color: ${({theme}) => theme.palette.primary};
-		border-radius: ${({theme}) => theme.borderRadius.xsm};
+		border-radius: ${({theme}) => theme.borderRadius.xxsm};
 		margin: 0 auto;
 
 		${({theme}) => theme.breakpoints.down('md')} {
@@ -35,6 +37,15 @@ const AddAnswer = styled.button`
 
 	&::before {
 		transform: rotate(90deg);
+		position: relative;
+
+		${({theme}) => theme.breakpoints.down('md')} {
+			top: 2px;
+		}
+
+		${({theme}) => theme.breakpoints.up('md')} {
+			top: 3px;
+		}
 	}
 `
 

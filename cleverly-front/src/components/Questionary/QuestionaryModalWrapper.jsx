@@ -9,7 +9,7 @@ const QuestionaryModalWrapper = styled.div`
 	border-radius: ${({theme}) => theme.borderRadius.md};
 
 	${({theme}) => theme.breakpoints.down('xl')} {
-		padding: 10px 10px 30px;
+		padding: 30px 10px 30px 15px;
 	}
 
 	${({theme}) => theme.breakpoints.up('xl')} {

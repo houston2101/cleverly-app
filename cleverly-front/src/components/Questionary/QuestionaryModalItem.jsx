@@ -43,6 +43,7 @@ const dynamicStyles = ({
 
 const QuestionaryModalItem = styled.div`
 	display: flex;
+	position: relative;
 	align-items: center;
 	justify-content: center;
 	box-shadow: ${({theme}) => theme.boxShadow.marker};

@@ -281,7 +281,7 @@ const Questionary = () => {
 							}
 							disabled={activeQuestion === 0 || !test.allowEdit}>
 							<ButtonArrow />
-							<ButtonText>Previous question</ButtonText>
+							<ButtonText>Prev question</ButtonText>
 						</Button>
 						<Button
 							dNone={true}

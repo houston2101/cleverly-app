@@ -6,6 +6,11 @@ const QuestionaryContentQuestionItemText = styled.div`
 	font-size: 16px;
 	line-height: 20px;
 	flex-grow: 1;
+	background-color: ${({theme}) => theme.palette.background.transparent};
+
+	& ~ div {
+		padding: 0;
+	}
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		font-size: 14px;

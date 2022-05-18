@@ -82,7 +82,6 @@ const modernNormalize = css`
 
 	button,
 	select {
-		/* 1 */
 		text-transform: none;
 	}
 
@@ -91,6 +90,17 @@ const modernNormalize = css`
 	[type='reset'],
 	[type='submit'] {
 		-webkit-appearance: button;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		background-color: #989fc9;
+		border-radius: 2px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: #503b7c;
+		border-radius: 2px;
 	}
 
 	::-moz-focus-inner {

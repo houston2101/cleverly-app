@@ -1,7 +1,7 @@
 import {ReactComponent as EditIcon} from '../../img/edit-icon.svg'
 import styled from '@emotion/styled'
 
-const EditUserNameIcon = styled(EditIcon)`
+const EditTitleIcon = styled(EditIcon)`
 	padding: 5px;
 
 	&:hover {
@@ -25,4 +25,4 @@ const EditUserNameIcon = styled(EditIcon)`
 	}
 `
 
-export default EditUserNameIcon
+export default EditTitleIcon

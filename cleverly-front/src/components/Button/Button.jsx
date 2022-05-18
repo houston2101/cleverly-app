@@ -16,6 +16,10 @@ filter: grayscale(100%);
 				display: none;
 			}
 		}
+
+		${theme.breakpoints.up('lg')} {
+			padding: 15px 25px;
+		}
 `
 		: ''}
 	${dir === 'left'

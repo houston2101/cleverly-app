@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-const UserNameWrapper = styled.div`
+const EditTitleWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: flex-end;
@@ -16,4 +16,4 @@ const UserNameWrapper = styled.div`
 	}
 `
 
-export default UserNameWrapper
+export default EditTitleWrapper

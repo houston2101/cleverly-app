@@ -49,7 +49,8 @@ const theme = {
 	},
 
 	borderRadius: {
-		xsm: '5px',
+		xxsm: '5px',
+		xsm: '7px',
 		sm: '10px',
 		md: '15px',
 		circle: '50%'

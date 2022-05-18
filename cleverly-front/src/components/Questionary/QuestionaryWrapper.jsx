@@ -10,10 +10,11 @@ const QuestionaryWrapper = styled(Container)`
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		flex-direction: column;
+		gap: 35px;
 	}
 
 	${({theme}) => theme.breakpoints.up('xl')} {
-		flex-direction: none;
+		flex-direction: row;
 		gap: 70px;
 	}
 `

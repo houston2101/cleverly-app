@@ -5,6 +5,7 @@ const QuestionTextWrapper = styled.div`
 	flex-direction: row;
 	align-items: center;
 	border-bottom: 2px solid ${({theme}) => theme.palette.primary};
+	font-family: ${({theme}) => theme.typography.fontFamilyLexend};
 
 	&:focus {
 		border-bottom: 2px solid ${({theme}) => theme.palette.primary};

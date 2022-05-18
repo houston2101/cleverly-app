@@ -8,10 +8,9 @@ const QuestionaryAside = styled.div`
 	${({theme}) => theme.breakpoints.up('xl')} {
 		display: flex;
 		flex-direction: column;
-		gap: 30px;
-		align-items: flex-end;
+		gap: 15px;
+		align-items: flex-start;
 		min-width: 520px;
-		order: 2;
 	}
 `
 

@@ -3,9 +3,6 @@ import UserSettingsWrapper from '../components/UserSettings/UserSettingsWrapper'
 import UserInfoWrapper from '../components/UserSettings/UserInfoWrapper'
 import UserAvatar from '../components/UserSettings/UserAvatar'
 import UserDataWrapper from '../components/UserSettings/UserDataWrapper'
-import UserNameWrapper from '../components/UserSettings/UserNameWrapper'
-import UserName from '../components/UserSettings/UserName'
-import EditUserNameIcon from '../components/UserSettings/EditUserNameIcon'
 import UserEmail from '../components/UserSettings/UserEmail'
 import PasswordSettingsWrapper from '../components/UserSettings/PasswordSettingsWrapper'
 import SettingsInput from '../components/UserSettings/SettingsInput'
@@ -16,6 +13,9 @@ import UserSettingsIcon from '../components/UserSettings/UserSettingsIcon'
 import PasswordSettingsContent from '../components/UserSettings/PasswordSettingsContent'
 import ThemeToggler from '../components/Icons/ThemeToggler'
 import SettingsInputWrapper from '../components/UserSettings/SettingsInputWrapper'
+import EditTitleIcon from '../components/EditableTitle/EditTitleIcon'
+import EditTitleWrapper from '../components/EditableTitle/EditTitleWrapper'
+import EditTitle from '../components/EditableTitle/EditTitle'
 
 const UserSettings = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
@@ -30,10 +30,10 @@ const UserSettings = () => {
 				<UserSettingsIcon onClick={handleSetIsOpen} isOpen={isOpen} />
 				<UserAvatar />
 				<UserDataWrapper>
-					<UserNameWrapper>
-						<UserName>{userSettingsData.username}</UserName>
-						<EditUserNameIcon />
-					</UserNameWrapper>
+					<EditTitleWrapper>
+						<EditTitle>{userSettingsData.username}</EditTitle>
+						<EditTitleIcon />
+					</EditTitleWrapper>
 					<UserEmail>{userSettingsData.email}</UserEmail>
 				</UserDataWrapper>
 			</UserInfoWrapper>

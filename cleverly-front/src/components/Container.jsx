@@ -15,7 +15,7 @@ const Container = styled.div`
 
 	${({theme}) => theme.breakpoints.between('xl', '2xl')} {
 		padding-left: 60px;
-		padding-right: : 60px;
+		padding-right: 60px;
 	}
 
 	${({theme}) => theme.breakpoints.up('2xl')} {
