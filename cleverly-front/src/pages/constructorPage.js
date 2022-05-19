@@ -65,6 +65,22 @@ const ConstructorPage = () => {
 			questions: [...test.questions, defaultQuestion(num)]
 		})
 
+	const handlerRemoveQuestion = (number) => {
+		setTest({
+			...test,
+			questions: [
+				...test.questions
+					.filter((question) => question.number !== number)
+					.map((question, idx) => {
+						return {
+							...question,
+							number: idx
+						}
+					})
+			]
+		})
+	}
+
 	const handlerUpdateQuestion = (updatedQuestion) =>
 		setTest({
 			...test,
@@ -98,6 +114,21 @@ const ConstructorPage = () => {
 					]
 			  })
 			: null
+
+	const removeAnswer = (currentQuestion, index) =>
+		handlerUpdateQuestion({
+			...currentQuestion,
+			answers: [
+				...currentQuestion.answers
+					.filter((answer) => answer.index !== index)
+					.map((answer, idx) => {
+						return {
+							...answer,
+							index: indexes[idx]
+						}
+					})
+			]
+		})
 
 	const changeAnswerText = (e, index, currentQuestion) => {
 		handlerUpdateQuestion({
@@ -154,6 +185,7 @@ const ConstructorPage = () => {
 			<QuestionaryContent>
 				<QuestionConstructor
 					addNewAnswer={addNewAnswer}
+					removeAnswer={removeAnswer}
 					currentQuestionNum={currentQuestionNumber}
 					currentQuestion={test.questions[currentQuestionNumber]}
 					changeQuestionText={changeQuestionText}
@@ -170,6 +202,7 @@ const ConstructorPage = () => {
 					currentQuestion={currentQuestionNumber}
 					currentQuestionHandler={currentQuestionHandler}
 					handlerAddQuestion={handlerAddQuestion}
+					handlerRemoveQuestion={handlerRemoveQuestion}
 					handlerAllowEdit={handlerAllowEdit}
 					allowEditValue={test.allowEdit}
 					handlerTimeLimit={handlerTimeLimit}

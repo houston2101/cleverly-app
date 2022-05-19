@@ -9,6 +9,7 @@ const QuestionConstructorDeleteStackItem = styled.span`
 	background-color: ${({theme}) => theme.palette.primary};
 	top: -10px;
 	right: -10px;
+	z-index: 2;
 
 	&:hover {
 		cursor: pointer;

@@ -8,6 +8,7 @@ import QuestionaryModalInfo from '../components/Questionary/QuestionaryModalInfo
 import QuestionaryModalStack from '../components/Questionary/QuestionaryModalStack'
 import QuestionaryModalItem from '../components/Questionary/QuestionaryModalItem'
 import ModalCheckbox from '../components/ModalCheckbox/ModalCheckbox'
+import QuestionaryModalItemWrapper from '../components/Questionary/QuestionaryModalItemWrapper'
 import QuestionConstructorDeleteStackItem from '../components/QuestionConstructor/QuestionConstructorDeleteStackItem'
 
 const TestSettings = ({
@@ -15,6 +16,7 @@ const TestSettings = ({
 	currentQuestion,
 	currentQuestionHandler,
 	handlerAddQuestion,
+	handlerRemoveQuestion,
 	handlerAllowEdit,
 	allowEditValue,
 	handlerTimeLimit,
@@ -46,15 +48,25 @@ const TestSettings = ({
 					</QuestionaryModalInfo>
 					<QuestionaryModalStack>
 						{questions.map((el, idx) => (
-							<QuestionaryModalItem
-								key={idx}
-								isTestDone={false}
-								isAnswered={false}
-								isActive={currentQuestion === idx}
-								onClick={() => currentQuestionHandler(idx)}>
-								{idx + 1}
-								<QuestionConstructorDeleteStackItem />
-							</QuestionaryModalItem>
+							<QuestionaryModalItemWrapper key={idx}>
+								<QuestionaryModalItem
+									isTestDone={false}
+									isAnswered={false}
+									isActive={currentQuestion === el.number}
+									onClick={() =>
+										currentQuestionHandler(el.number)
+									}>
+									{el.number}
+								</QuestionaryModalItem>
+								{questions.length > 1 && (
+									<QuestionConstructorDeleteStackItem
+										onClick={(e) => {
+											handlerRemoveQuestion(el.number)
+											e.stopPropagation()
+										}}
+									/>
+								)}
+							</QuestionaryModalItemWrapper>
 						))}
 						<QuestionaryModalItem
 							isTestDone={false}

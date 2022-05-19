@@ -8,6 +8,7 @@ const TestCover = styled.div`
 	box-shadow: ${({theme}) => theme.boxShadow.base};
 	border-radius: ${({theme}) => theme.borderRadius.xsm};
 	flex-shrink: 0;
+	position: relative;
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		width: 70px;

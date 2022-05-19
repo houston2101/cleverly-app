@@ -16,6 +16,7 @@ const MAXCOUNTOFQUESTIONS = 6
 
 const QuestionConstructor = ({
 	addNewAnswer,
+	removeAnswer,
 	currentQuestionNum,
 	currentQuestion,
 	changeQuestionText,
@@ -44,7 +45,7 @@ const QuestionConstructor = ({
 				/>
 				<QuestionaryContentQuestionMark />
 				{currentQuestion.answers.map(({index, text, isCorrect}) => (
-					<QuestionaryContentQuestionItem>
+					<QuestionaryContentQuestionItem key={index}>
 						<QuestionaryContentQuestionItemIndex>
 							{index}
 						</QuestionaryContentQuestionItemIndex>
@@ -67,7 +68,9 @@ const QuestionConstructor = ({
 							}
 							value={isCorrect}
 						/>
-						<QuestionConstructorDeleteQuestion />
+						<QuestionConstructorDeleteQuestion
+							onClick={() => removeAnswer(currentQuestion, index)}
+						/>
 					</QuestionaryContentQuestionItem>
 				))}
 			</QuestionaryContentQuestionStack>
