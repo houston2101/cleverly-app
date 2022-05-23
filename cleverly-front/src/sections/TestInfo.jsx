@@ -12,28 +12,17 @@ import uploadcareService from '../service/uploadcareService'
 const TestInfo = ({title, setName}) => {
 	const [allowEdit, setAllowEdit] = React.useState(false)
 	const imageFile = React.useRef()
+	const [imageData, setImageData] = React.useState(null)
 	const handlerSetValue = (e) => setName(e.target.value)
 
 	const handlerAllowEdit = () => {
 		setAllowEdit(!allowEdit)
 	}
 
-	const handlerChaneFile = () => {
+	const handlerChaneFile = async () => {
 		let file = imageFile?.current?.files[0]
-
-		let reader = new FileReader()
-
-		reader.readAsText(file)
-
-		reader.onload = async () => {
-			const service = new uploadcareService()
-			await service.uploadFile(reader)
-			console.log(reader)
-		}
-
-		reader.onerror = function () {
-			console.log(reader.error)
-		}
+		const service = new uploadcareService()
+		await service.uploadFile(file)
 	}
 
 	React.useEffect(() => {

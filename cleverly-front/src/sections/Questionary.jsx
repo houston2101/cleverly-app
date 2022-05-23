@@ -136,7 +136,7 @@ const test = {
 		},
 		{
 			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
+			multipleAllow: true,
 			answers: [
 				{
 					isCorrect: false,
@@ -165,183 +165,212 @@ const test = {
 
 const Questionary = () => {
 	const [userResult, setUserResult] = React.useState({
-		testId: '123QWER321',
+		testId: test.id,
 		userId: 'someUserId',
+		countOfCorrectAnswers: null,
 		answers: []
 	})
+	const [testDone, setTestDone] = React.useState(false)
 	const [activeQuestion, setActiveQuestion] = React.useState(0)
-	const [selectedAnswers, setSelectedAnswers] = React.useState([])
+	const [answeredQuestions, setAnsweredQuestions] = React.useState(
+		new Array(test.questions.length)
+	)
 
-	const handleSetUserResult = () => {
-		setSelectedAnswers(
-			userResult?.answers?.find((el) => el.question === activeQuestion)
-				?.selectedAnswers || []
+	const handleSelectAnswer = (index, isCorrect, multipleAllow) => {
+		const tempQuestions = [...answeredQuestions]
+		const tempAnswer = answeredQuestions[activeQuestion]
+
+		tempQuestions.splice(
+			activeQuestion,
+			1,
+			(tempAnswer &&
+				multipleAllow && {
+					...tempAnswer,
+					answers: tempAnswer.answers.find(
+						(answer) => answer.index === index
+					)
+						? [
+								...tempAnswer.answers.filter(
+									(answer) => answer.index !== index
+								)
+						  ]
+						: [
+								...tempAnswer.answers,
+								{
+									index,
+									isCorrect
+								}
+						  ]
+				}) || {
+				number: activeQuestion,
+				answers: [
+					{
+						index,
+						isCorrect
+					}
+				]
+			}
 		)
-
-		selectedAnswers.length > 0 || !test.allowEdit
-			? setUserResult({
-					...userResult,
-					answers: [
-						...userResult.answers.filter(
-							(el) => el.question !== activeQuestion
-						),
-						{selectedAnswers, question: activeQuestion}
-					]
-			  })
-			: setUserResult({
-					...userResult,
-					answers: [
-						...userResult.answers.filter(
-							(el) => el.question !== activeQuestion
-						)
-					]
-			  })
+		setAnsweredQuestions(tempQuestions)
 	}
+
+	// Don't touch
 
 	const handleSelectQuestion = (question) => {
-		handleSetUserResult()
 		setActiveQuestion(question)
-		return setSelectedAnswers(
-			userResult?.answers?.find((el) => el.question === activeQuestion)
-				?.selectedAnswers || []
-		)
 	}
 
-	const handleSetSelectedAnswers = (answerId, isCorrect, multipleAllow) =>
-		selectedAnswers.find((el) => el.id === answerId)
-			? setSelectedAnswers(
-					selectedAnswers.filter((el) => el.id !== answerId)
-			  )
-			: setSelectedAnswers(
-					multipleAllow
-						? [...selectedAnswers, {id: answerId, isCorrect}]
-						: [{id: answerId, isCorrect}]
-			  )
-
 	const handleFinishTest = () => {
-		handleSetUserResult()
-		console.log(userResult)
+		setTestDone(true)
 	}
 
 	React.useEffect(() => {
-		console.log(userResult)
+		console.log('active question', activeQuestion)
 	}, [activeQuestion])
 
 	React.useEffect(() => {
-		console.log(selectedAnswers)
-	}, [selectedAnswers])
+		console.log(answeredQuestions)
+	}, [answeredQuestions])
+
+	React.useEffect(() => {
+		setUserResult({
+			...userResult,
+			countOfCorrectAnswers: test.questions.map(
+				({number, multipleAllow, answers}) => {
+					userResult.answers.find(({question}) => question === number)
+				}
+			),
+			answers: answeredQuestions
+		})
+	}, [])
 
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 
 	return (
 		<QuestionaryWrapper>
-			<QuestionaryContent>
-				<QuestionaryContentQuestion>
-					<QuestionaryContentQuestionText>
-						{test.questions[activeQuestion].text}
-					</QuestionaryContentQuestionText>
-					<QuestionaryContentQuestionStack>
-						<QuestionaryContentQuestionMark>
-							{test.questions[activeQuestion].multipleAllow
-								? 'select few answers'
-								: 'select one answer'}
-						</QuestionaryContentQuestionMark>
-						{test.questions[activeQuestion].answers.map(
-							({isCorrect, text, index}) => (
-								<QuestionaryContentQuestionItem
-									key={text}
+			{testDone ? (
+				<div>Processing</div>
+			) : (
+				<>
+					<QuestionaryContent>
+						<QuestionaryContentQuestion>
+							<QuestionaryContentQuestionText>
+								{test.questions[activeQuestion].text}
+							</QuestionaryContentQuestionText>
+							<QuestionaryContentQuestionStack>
+								<QuestionaryContentQuestionMark>
+									{test.questions[activeQuestion]
+										.multipleAllow
+										? 'select few answers'
+										: 'select one answer'}
+								</QuestionaryContentQuestionMark>
+								{test.questions[activeQuestion].answers.map(
+									({isCorrect, text, index}) => (
+										<QuestionaryContentQuestionItem
+											key={text}
+											isSelected={answeredQuestions[
+												activeQuestion
+											]?.answers?.find(
+												(answer) =>
+													answer?.index === index
+											)}
+											onClick={() =>
+												handleSelectAnswer(
+													index,
+													isCorrect,
+													test.questions[
+														activeQuestion
+													].multipleAllow
+												)
+											}>
+											<QuestionaryContentQuestionItemIndex>
+												{index}
+											</QuestionaryContentQuestionItemIndex>
+											<QuestionaryContentQuestionItemText>
+												{text}
+											</QuestionaryContentQuestionItemText>
+										</QuestionaryContentQuestionItem>
+									)
+								)}
+							</QuestionaryContentQuestionStack>
+							<QuestionaryContentQuestionBottom>
+								<Button
+									dir='left'
+									dNone={true}
 									onClick={() =>
-										handleSetSelectedAnswers(
-											index,
-											isCorrect,
-											test.questions[activeQuestion]
-												.multipleAllow
-										)
+										handleSelectQuestion(activeQuestion - 1)
 									}
-									isSelected={selectedAnswers.find(
-										(el) => el.id === index
-									)}>
-									<QuestionaryContentQuestionItemIndex>
-										{index}
-									</QuestionaryContentQuestionItemIndex>
-									<QuestionaryContentQuestionItemText>
-										{text}
-									</QuestionaryContentQuestionItemText>
-								</QuestionaryContentQuestionItem>
-							)
-						)}
-					</QuestionaryContentQuestionStack>
-					<QuestionaryContentQuestionBottom>
-						<Button
-							dir='left'
-							dNone={true}
-							onClick={() =>
-								handleSelectQuestion(activeQuestion - 1)
-							}
-							disabled={activeQuestion === 0 || !test.allowEdit}>
-							<ButtonArrow />
-							<ButtonText>Prev question</ButtonText>
-						</Button>
-						<Button
-							dNone={true}
-							onClick={() =>
-								handleSelectQuestion(activeQuestion + 1)
-							}
-							disabled={
-								activeQuestion === test.questions.length - 1
-							}>
-							<ButtonText>Next question</ButtonText>
-							<ButtonArrow />
-						</Button>
-					</QuestionaryContentQuestionBottom>
-				</QuestionaryContentQuestion>
-			</QuestionaryContent>
+									disabled={
+										activeQuestion === 0 || !test.allowEdit
+									}>
+									<ButtonArrow />
+									<ButtonText>Prev question</ButtonText>
+								</Button>
+								<Button
+									dNone={true}
+									onClick={() =>
+										handleSelectQuestion(activeQuestion + 1)
+									}
+									disabled={
+										activeQuestion ===
+										test.questions.length - 1
+									}>
+									<ButtonText>Next question</ButtonText>
+									<ButtonArrow />
+								</Button>
+							</QuestionaryContentQuestionBottom>
+						</QuestionaryContentQuestion>
+					</QuestionaryContent>
 
-			<QuestionaryAside>
-				<QuestionaryTitle>{test.title}</QuestionaryTitle>
-				<QuestionaryModal isOpen={isOpen}>
-					<QuestionaryModalButton onClick={handleIsOpen}>
-						<QuestionaryModalButtonItem />
-					</QuestionaryModalButton>
-					<QuestionaryModalContent>
-						<QuestionaryModalWrapper>
-							<QuestionaryModalInfo>
-								<QuestionaryModalText>
-									Question: {activeQuestion + 1}/
-									{test.questions.length}
-								</QuestionaryModalText>
-								<QuestionaryModalText>
-									Time: 1h 40m
-								</QuestionaryModalText>
-							</QuestionaryModalInfo>
-							<QuestionaryModalStack>
-								{test.questions.map((el, idx) => (
-									<QuestionaryModalItem
-										key={idx}
-										isTestDone={false}
-										isAnswered={userResult?.answers?.find(
-											(el) => el.question === idx
-										)}
-										isAllowEdit={test.allowEdit}
-										isActive={idx === activeQuestion}
-										onClick={() =>
-											handleSelectQuestion(idx)
-										}>
-										{idx + 1}
-									</QuestionaryModalItem>
-								))}
-							</QuestionaryModalStack>
-						</QuestionaryModalWrapper>
-					</QuestionaryModalContent>
-				</QuestionaryModal>
-				<SendButtonWrapper>
-					<Button onClick={handleFinishTest}>
-						<ButtonText>Finish and send results</ButtonText>
-						<ButtonArrow />
-					</Button>
-				</SendButtonWrapper>
-			</QuestionaryAside>
+					<QuestionaryAside>
+						<QuestionaryTitle>{test.title}</QuestionaryTitle>
+						<QuestionaryModal isOpen={isOpen}>
+							<QuestionaryModalButton onClick={handleIsOpen}>
+								<QuestionaryModalButtonItem />
+							</QuestionaryModalButton>
+							<QuestionaryModalContent>
+								<QuestionaryModalWrapper>
+									<QuestionaryModalInfo>
+										<QuestionaryModalText>
+											Question: {activeQuestion + 1}/
+											{test.questions.length}
+										</QuestionaryModalText>
+										<QuestionaryModalText>
+											Time: 1h 40m
+										</QuestionaryModalText>
+									</QuestionaryModalInfo>
+									<QuestionaryModalStack>
+										{test.questions.map((el, idx) => (
+											<QuestionaryModalItem
+												key={idx}
+												isTestDone={false}
+												isAnswered={answeredQuestions?.find(
+													(el) => el?.question === idx
+												)}
+												isAllowEdit={test.allowEdit}
+												isActive={
+													idx === activeQuestion
+												}
+												onClick={() =>
+													handleSelectQuestion(idx)
+												}>
+												{idx + 1}
+											</QuestionaryModalItem>
+										))}
+									</QuestionaryModalStack>
+								</QuestionaryModalWrapper>
+							</QuestionaryModalContent>
+						</QuestionaryModal>
+						<SendButtonWrapper>
+							<Button onClick={handleFinishTest}>
+								<ButtonText>Finish and send results</ButtonText>
+								<ButtonArrow />
+							</Button>
+						</SendButtonWrapper>
+					</QuestionaryAside>
+				</>
+			)}
 		</QuestionaryWrapper>
 	)
 }

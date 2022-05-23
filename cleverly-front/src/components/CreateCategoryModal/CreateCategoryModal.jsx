@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 
 const CreateCategoryModal = styled.div`
 	display: block;
-	position: absolute;
-	z-index: 2;
+	position: fixed;
+	z-index: 11;
 
 	top: 50%;
 	left: 50%;

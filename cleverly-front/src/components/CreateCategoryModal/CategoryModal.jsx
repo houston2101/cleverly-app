@@ -10,28 +10,32 @@ import ButtonText from '../Button/ButtonText'
 import SettingsInput from '../UserSettings/SettingsInput'
 import ModalSettingsWrapper from './ModalSettingsWrapper'
 import CreateCategoryModal from './CreateCategoryModal'
+import ModalBackground from './ModalBackground'
 
 const CategoryModal = () => {
 	return (
-		<CreateCategoryModal>
-			<ModalCloseIcon />
-			<ModalWrapper>
-				<ModalSettingsWrapper>
-					<ModalTitle>Create new category</ModalTitle>
-					<ModalInfoWrapper>
-						<TestCover>
-							<TestCoverImage />
-						</TestCover>
-						<CategoryTitleWrapper>
-							<SettingsInput placeholder='Category name' />
-							<Button>
-								<ButtonText>Create category</ButtonText>
-							</Button>
-						</CategoryTitleWrapper>
-					</ModalInfoWrapper>
-				</ModalSettingsWrapper>
-			</ModalWrapper>
-		</CreateCategoryModal>
+		<>
+			<ModalBackground />
+			<CreateCategoryModal>
+				<ModalCloseIcon />
+				<ModalWrapper>
+					<ModalSettingsWrapper>
+						<ModalTitle>Create new category</ModalTitle>
+						<ModalInfoWrapper>
+							<TestCover>
+								<TestCoverImage />
+							</TestCover>
+							<CategoryTitleWrapper>
+								<SettingsInput placeholder='Category name' />
+								<Button>
+									<ButtonText>Create category</ButtonText>
+								</Button>
+							</CategoryTitleWrapper>
+						</ModalInfoWrapper>
+					</ModalSettingsWrapper>
+				</ModalWrapper>
+			</CreateCategoryModal>
+		</>
 	)
 }
 
