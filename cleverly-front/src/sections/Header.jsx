@@ -16,11 +16,13 @@ import HeaderAccountItemName from '../components/Header/HeaderAccountItemName'
 import HeaderMenuIcon from '../components/Header/HeaderMenuIcon'
 import HeaderMobileMenu from '../components/Header/HeaderMobileMenu'
 import HeaderMobileMenuWrapper from '../components/Header/HeaderMobileMenuWrapper'
+import {AuthContext} from '../context/AuthContext'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 
+	const auth = React.useContext(AuthContext)
 	return (
 		<>
 			<HeaderWrapper>
@@ -52,7 +54,9 @@ const Header = () => {
 												{headerData.accountName}
 											</HeaderAccountItemName>
 										</HeaderAccountInfoItem>
-										<HeaderAccountInfoItem to='/login'>
+										<HeaderAccountInfoItem
+											onClick={auth.logout}
+											to='/'>
 											<HeaderLogoutIcon />
 											<HeaderAccountItemName>
 												{headerData.logOutText}

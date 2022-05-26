@@ -9,6 +9,7 @@ const FormWrapper = styled.section`
 	border-radius: ${({theme}) => theme.borderRadius.md};
 	margin: auto;
 	z-index: 1;
+	width: 100%;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		padding: 53px 18px;

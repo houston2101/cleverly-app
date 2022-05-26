@@ -8,6 +8,18 @@ const Input = styled.input`
 	border-radius: ${({theme}) => theme.borderRadius.md};
 	font-family: ${({theme}) => theme.typography.fontFamilyLexend};
 
+	${({theme}) => theme.breakpoints.down('md')} {
+		font-size: 14px;
+		padding: 10px 15px;
+		max-width: 450px;
+	}
+
+	${({theme}) => theme.breakpoints.up('md')} {
+		padding: 15px 20px;
+		font-size: 18px;
+		max-width: 500px;
+	}
+
 	&:invalid {
 		border-color: ${({theme}) => theme.palette.accent.lightRed};
 	}
@@ -26,18 +38,6 @@ const Input = styled.input`
 
 	&::placeholder {
 		color: ${({theme}) => theme.palette.text.placeholder};
-
-		${({theme}) => theme.breakpoints.down('md')} {
-			font-size: 14px;
-			padding: 10px 15px;
-			max-width: 450px;
-		}
-
-		${({theme}) => theme.breakpoints.up('md')} {
-			padding: 15px 20px;
-			font-size: 18px;
-			max-width: 500px;
-		}
 	}
 `
 

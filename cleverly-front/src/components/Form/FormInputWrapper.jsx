@@ -4,14 +4,16 @@ const FormInputWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	max-width: 300px;
+	width: 100%;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		margin-bottom: 39px;
+		max-width: 300px;
 	}
 
 	${({theme}) => theme.breakpoints.up('md')} {
 		margin-bottom: 67px;
+		max-width: 400px;
 	}
 `
 

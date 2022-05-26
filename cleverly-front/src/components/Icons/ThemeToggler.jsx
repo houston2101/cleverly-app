@@ -173,10 +173,10 @@ const Component = styled.button`
 
 const ThemeToggler = ({isLight, handle}) => (
 	<Component isLight={isLight} onClick={handle}>
-		<div class='switch'>
-			<div class='rays ray-1'></div>
-			<div class='rays ray-2'></div>
-			<span class='sun'></span>
+		<div className='switch'>
+			<div className='rays ray-1'></div>
+			<div className='rays ray-2'></div>
+			<span className='sun'></span>
 		</div>
 	</Component>
 )

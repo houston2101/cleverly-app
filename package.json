@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  },
+  "name": "cleverly-app",
+  "description": "diploma project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js",
+    "server": "npm run dev --prefix cleverly-back",
+    "client": "npm run dev --prefix cleverly-front",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/houston2101/cleverly-app.git"
+  },
+  "author": "Eugenia Pereverzeva <xoxotwm21.01@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/houston2101/cleverly-app/issues"
+  },
+  "homepage": "https://github.com/houston2101/cleverly-app#readme"
+}

@@ -14,6 +14,10 @@ const WarningModalWrapper = styled.div`
 	justify-content: center;
 	background-color: ${({theme}) => theme.palette.accent.lightRed};
 	border-radius: ${({theme}) => theme.borderRadius.md};
+
+	& + & {
+		margin-top: 10px;
+	}
 `
 
 export default WarningModalWrapper

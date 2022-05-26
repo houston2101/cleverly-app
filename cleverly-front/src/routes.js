@@ -12,20 +12,32 @@ import {
 	ConstructorPage
 } from './pages'
 
-const SiteRouter = () => (
-	<Routes>
-		<Route path='/' element={<UserPage />} />
-		<Route path='/categories' element={<CategoriesPage />} />
-		<Route path='/login' element={<LoginPage />} />
-		<Route path='/register' element={<SignUpPage />} />
-		<Route path='/results' element={<AllResultsPage />} />
-		<Route path='/results/:id' element={<TestResultPage />} />
-		<Route path='/categories/:id' element={<CategoryPage />} />
-		<Route path='/test/:id' element={<QuestionaryPage />} />
-		<Route path='/verification' element={<VerificationPage />} />
-
-		<Route path='/constructor' element={<ConstructorPage />} />
-	</Routes>
-)
+const SiteRouter = ({isAuthenticated}) => {
+	return (
+		<Routes>
+			{isAuthenticated ? (
+				<>
+					<Route path='/' element={<UserPage />} />
+					<Route path='/categories' element={<CategoriesPage />} />
+					<Route path='/results' element={<AllResultsPage />} />
+					<Route path='/results/:id' element={<TestResultPage />} />
+					<Route path='/categories/:id' element={<CategoryPage />} />
+					<Route path='/test/:id' element={<QuestionaryPage />} />
+					<Route
+						path='/verification'
+						element={<VerificationPage />}
+					/>
+					<Route path='/constructor' element={<ConstructorPage />} />
+				</>
+			) : (
+				<>
+					<Route path='/' element={<LoginPage />} />
+					<Route path='/register' element={<SignUpPage />} />
+				</>
+			)}
+			<Route path='/*' element={<div>404</div>} />
+		</Routes>
+	)
+}
 
 export default SiteRouter
