@@ -11,8 +11,7 @@ import {useHttp} from '../hooks/http.hook'
 import {AuthContext} from '../context/AuthContext'
 
 const LoginPage = () => {
-	const {warningText, title, email, password, signUpButton, logInButton} =
-		loginPageData
+	const {title, email, password, signUpButton, logInButton} = loginPageData
 
 	const auth = React.useContext(AuthContext)
 
@@ -31,7 +30,13 @@ const LoginPage = () => {
 			const data = await request('/api/auth/login', 'POST', {
 				...userData
 			})
-			auth.login(data.token, data.userId, data.name, data.isAdmin)
+			auth.login(
+				data.token,
+				data.email,
+				data.userId,
+				data.name,
+				data.isAdmin
+			)
 		} catch (e) {
 			console.log(e)
 		}

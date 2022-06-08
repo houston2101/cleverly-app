@@ -17,7 +17,7 @@ import EditTitleIcon from '../components/EditableTitle/EditTitleIcon'
 import EditTitleWrapper from '../components/EditableTitle/EditTitleWrapper'
 import EditTitle from '../components/EditableTitle/EditTitle'
 
-const UserSettings = () => {
+const UserSettings = ({name, email}) => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleSetIsOpen = () => setIsOpen(!isOpen)
 
@@ -31,10 +31,10 @@ const UserSettings = () => {
 				<UserAvatar />
 				<UserDataWrapper>
 					<EditTitleWrapper>
-						<EditTitle>{userSettingsData.username}</EditTitle>
+						<EditTitle>{name}</EditTitle>
 						<EditTitleIcon />
 					</EditTitleWrapper>
-					<UserEmail>{userSettingsData.email}</UserEmail>
+					<UserEmail>{email}</UserEmail>
 				</UserDataWrapper>
 			</UserInfoWrapper>
 

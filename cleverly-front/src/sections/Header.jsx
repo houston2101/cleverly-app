@@ -22,55 +22,57 @@ const Header = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 
-	const auth = React.useContext(AuthContext)
+	const {name, isAdmin, logout, isAuthenticated} =
+		React.useContext(AuthContext)
 	return (
 		<>
 			<HeaderWrapper>
 				<HeaderContainer>
-					<HeaderMenu>
-						<HeaderMenuIcon onClick={handleIsOpen}>
-							<span />
-						</HeaderMenuIcon>
+					{isAuthenticated && (
+						<HeaderMenu>
+							<HeaderMenuIcon onClick={handleIsOpen}>
+								<span />
+							</HeaderMenuIcon>
 
-						<HeaderSideMenu>
-							<HeaderMobileMenu isOpen={isOpen}>
-								<HeaderMobileMenuWrapper>
-									<HeaderStack>
-										{headerData.headerLinks.map(
-											({label, link}, idx) => (
-												<HeaderStackItem
-													to={link}
-													key={idx}>
-													{label}
-												</HeaderStackItem>
-											)
-										)}
-									</HeaderStack>
+							<HeaderSideMenu>
+								<HeaderMobileMenu isOpen={isOpen}>
+									<HeaderMobileMenuWrapper>
+										<HeaderStack>
+											{headerData.headerLinks.map(
+												({label, link}, idx) => (
+													<HeaderStackItem
+														to={link}
+														key={idx}>
+														{label}
+													</HeaderStackItem>
+												)
+											)}
+										</HeaderStack>
 
-									<HeaderAccountInfo>
-										<HeaderAccountInfoItem to='/'>
-											<HeaderAccountIcon />
-											<HeaderAccountItemName username>
-												{headerData.accountName}
-											</HeaderAccountItemName>
-										</HeaderAccountInfoItem>
-										<HeaderAccountInfoItem
-											onClick={auth.logout}
-											to='/'>
-											<HeaderLogoutIcon />
-											<HeaderAccountItemName>
-												{headerData.logOutText}
-											</HeaderAccountItemName>
-										</HeaderAccountInfoItem>
-									</HeaderAccountInfo>
-								</HeaderMobileMenuWrapper>
-							</HeaderMobileMenu>
-
-							<HeaderLogoWrapper to='/'>
-								<HeaderLogo />
-							</HeaderLogoWrapper>
-						</HeaderSideMenu>
-					</HeaderMenu>
+										<HeaderAccountInfo>
+											<HeaderAccountInfoItem to='/'>
+												<HeaderAccountIcon />
+												<HeaderAccountItemName username>
+													{name}
+												</HeaderAccountItemName>
+											</HeaderAccountInfoItem>
+											<HeaderAccountInfoItem
+												onClick={logout}
+												to='/'>
+												<HeaderLogoutIcon />
+												<HeaderAccountItemName>
+													{headerData.logOutText}
+												</HeaderAccountItemName>
+											</HeaderAccountInfoItem>
+										</HeaderAccountInfo>
+									</HeaderMobileMenuWrapper>
+								</HeaderMobileMenu>
+							</HeaderSideMenu>
+						</HeaderMenu>
+					)}
+					<HeaderLogoWrapper to='/'>
+						<HeaderLogo />
+					</HeaderLogoWrapper>
 				</HeaderContainer>
 			</HeaderWrapper>
 

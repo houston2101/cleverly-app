@@ -10,6 +10,15 @@ const TestCover = styled.div`
 	flex-shrink: 0;
 	position: relative;
 
+	& img {
+		position: absolute;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
 	${({theme}) => theme.breakpoints.down('xl')} {
 		width: 70px;
 		height: 70px;

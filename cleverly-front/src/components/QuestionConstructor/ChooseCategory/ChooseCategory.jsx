@@ -3,26 +3,27 @@ import CategorySelector from './CategorySelector'
 import CategoryList from './CategoryList'
 import CategoryListItem from './CategoryListItem'
 import CategorySelectorWrapper from './CategorySelectorWrapper'
+import {CategoryContext} from '../../../context/CategoryContext'
 
-const ChooseCategory = () => {
+const ChooseCategory = ({category, handlerSetCategory}) => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
+	const {categories} = React.useContext(CategoryContext)
 
 	return (
 		<CategorySelectorWrapper>
 			<CategorySelector onClick={handleIsOpen}>
-				Choose category
+				{categories.find(({_id}) => _id === category).title ||
+					'Choose category'}
 			</CategorySelector>
 			<CategoryList isOpen={isOpen}>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
-				<CategoryListItem>category name</CategoryListItem>
+				{categories.map(({title, _id}) => (
+					<CategoryListItem
+						key={_id}
+						onClick={() => handlerSetCategory(_id)}>
+						{title}
+					</CategoryListItem>
+				))}
 			</CategoryList>
 		</CategorySelectorWrapper>
 	)

@@ -7,22 +7,20 @@ import TestCover from '../components/QuestionConstructor/TestCover'
 import TestCoverImage from '../components/QuestionConstructor/TestCoverImage'
 import TestCoverInput from '../components/QuestionConstructor/TestCoverInput'
 
-import uploadcareService from '../service/uploadcareService'
+import uploadService from '../service/uploadcareService'
 
-const TestInfo = ({title, setName}) => {
+const TestInfo = ({title, imageData, setName, setImage}) => {
 	const [allowEdit, setAllowEdit] = React.useState(false)
 	const imageFile = React.useRef()
-	const [imageData, setImageData] = React.useState(null)
 	const handlerSetValue = (e) => setName(e.target.value)
 
 	const handlerAllowEdit = () => {
 		setAllowEdit(!allowEdit)
 	}
 
-	const handlerChaneFile = async () => {
+	const handlerChangeFile = async () => {
 		let file = imageFile?.current?.files[0]
-		const service = new uploadcareService()
-		await service.uploadFile(file)
+		await uploadService.uploadFile(file).then((data) => setImage(data))
 	}
 
 	React.useEffect(() => {
@@ -43,9 +41,13 @@ const TestInfo = ({title, setName}) => {
 					type='file'
 					accept='image/png, image/jpeg'
 					ref={imageFile}
-					onChange={handlerChaneFile}
+					onChange={handlerChangeFile}
 				/>
-				<TestCoverImage />
+				{imageData ? (
+					<img src={imageData} alt={'Test cover'} />
+				) : (
+					<TestCoverImage />
+				)}
 			</TestCover>
 			<EditTitleWrapper onClick={!allowEdit && handlerAllowEdit}>
 				{allowEdit ? (

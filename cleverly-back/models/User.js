@@ -6,7 +6,7 @@ const schema = new Schema({
 	image: {type: String},
 	password: {type: String, required: true, unique: true},
 	isAdmin: {type: Boolean, required: true},
-	categories: {type: Types.ObjectId, ref: 'Categories'}
+	categories: [{type: Types.ObjectId, ref: 'Categories'}]
 })
 
 module.exports = model('User', schema)

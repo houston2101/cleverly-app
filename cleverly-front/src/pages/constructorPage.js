@@ -8,6 +8,8 @@ import QuestionaryContent from '../components/Questionary/QuestionaryContent'
 import ChooseCategory from '../components/QuestionConstructor/ChooseCategory/ChooseCategory'
 import Button from '../components/Button/Button'
 import ButtonText from '../components/Button/ButtonText'
+import {useHttp} from '../hooks/http.hook'
+import {TestContext} from '../context/TestContext'
 
 const indexes = ['A', 'B', 'C', 'D', 'E', 'F']
 
@@ -34,9 +36,11 @@ const ConstructorPage = () => {
 	const [test, setTest] = React.useState({
 		title: 'Set test name',
 		allowEdit: false,
-		category: 'undefined',
+		category: null,
+		image: null,
 		timeLimit: false,
 		time: null,
+		passingScore: 10,
 		questions: [defaultQuestion(0)]
 	})
 
@@ -54,6 +58,10 @@ const ConstructorPage = () => {
 		setTest({...test, timeLimit: timeLimit})
 
 	const handlerTime = (time) => setTest({...test, time: time})
+
+	const handlerSetImage = (image) => setTest({...test, image: image})
+
+	const handlerSetCategory = (id) => setTest({...test, category: id})
 
 	//! Global Test Settings
 
@@ -174,29 +182,39 @@ const ConstructorPage = () => {
 
 	//! Questions settings
 
-	//* For test
-	React.useEffect(() => {
-		console.log(test)
-	}, [test])
-	//* For test
+	const {loading, addTest} = React.useContext(TestContext)
+
+	const handlerSaveTest = () => {
+		addTest(test)
+	}
 
 	return (
 		<QuestionaryWrapper>
-			<QuestionaryContent>
-				<QuestionConstructor
-					addNewAnswer={addNewAnswer}
-					removeAnswer={removeAnswer}
-					currentQuestionNum={currentQuestionNumber}
-					currentQuestion={test.questions[currentQuestionNumber]}
-					changeQuestionText={changeQuestionText}
-					changeAnswerText={changeAnswerText}
-					changeAnswerStatus={changeAnswerStatus}
-					changeQuestionMultiSelect={changeQuestionMultiSelect}
-				/>
-			</QuestionaryContent>
+			{(loading && <div> Loading </div>) || (
+				<QuestionaryContent>
+					<QuestionConstructor
+						addNewAnswer={addNewAnswer}
+						removeAnswer={removeAnswer}
+						currentQuestionNum={currentQuestionNumber}
+						currentQuestion={test.questions[currentQuestionNumber]}
+						changeQuestionText={changeQuestionText}
+						changeAnswerText={changeAnswerText}
+						changeAnswerStatus={changeAnswerStatus}
+						changeQuestionMultiSelect={changeQuestionMultiSelect}
+					/>
+				</QuestionaryContent>
+			)}
 			<QuestionaryAside>
-				<TestInfo title={test.title} setName={handlerSetName} />
-				<ChooseCategory />
+				<TestInfo
+					title={test.title}
+					imageData={test.image}
+					setImage={handlerSetImage}
+					setName={handlerSetName}
+				/>
+				<ChooseCategory
+					category={test.category}
+					handlerSetCategory={handlerSetCategory}
+				/>
 				<TestSettings
 					questions={test.questions}
 					currentQuestion={currentQuestionNumber}
@@ -210,7 +228,7 @@ const ConstructorPage = () => {
 					handlerTime={handlerTime}
 					timeValue={test.time}
 				/>
-				<Button>
+				<Button disabled={loading} onClick={handlerSaveTest}>
 					<ButtonText>Save test</ButtonText>
 				</Button>
 			</QuestionaryAside>
