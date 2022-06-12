@@ -346,7 +346,12 @@ const Questionary = () => {
 												key={idx}
 												isTestDone={false}
 												isAnswered={answeredQuestions?.find(
-													(el) => el?.question === idx
+													(el) =>
+														el?.number === idx &&
+														!(
+															idx ===
+															activeQuestion
+														)
 												)}
 												isAllowEdit={test.allowEdit}
 												isActive={

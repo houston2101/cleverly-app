@@ -9,12 +9,13 @@ const ChooseCategory = ({category, handlerSetCategory}) => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 	const {categories} = React.useContext(CategoryContext)
-
 	return (
 		<CategorySelectorWrapper>
 			<CategorySelector onClick={handleIsOpen}>
-				{categories.find(({_id}) => _id === category).title ||
+				{(categories &&
+					categories?.find(({_id}) => _id === category)?.title) ||
 					'Choose category'}
+				s
 			</CategorySelector>
 			<CategoryList isOpen={isOpen}>
 				{categories.map(({title, _id}) => (
