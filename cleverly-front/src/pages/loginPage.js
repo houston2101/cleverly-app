@@ -30,13 +30,7 @@ const LoginPage = () => {
 			const data = await request('/api/auth/login', 'POST', {
 				...userData
 			})
-			auth.login(
-				data.token,
-				data.email,
-				data.userId,
-				data.name,
-				data.isAdmin
-			)
+			auth.login(data.token, data.userId)
 		} catch (e) {
 			console.log(e)
 		}

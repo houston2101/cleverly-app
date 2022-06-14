@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import {Link} from 'react-router-dom'
 
-const UserPageSliderItem = styled.div`
+const UserPageSliderItem = styled(Link)`
 	display: flex;
 	align-items: center;
 	flex-direction: column;

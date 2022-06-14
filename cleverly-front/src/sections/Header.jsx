@@ -17,13 +17,14 @@ import HeaderMenuIcon from '../components/Header/HeaderMenuIcon'
 import HeaderMobileMenu from '../components/Header/HeaderMobileMenu'
 import HeaderMobileMenuWrapper from '../components/Header/HeaderMobileMenuWrapper'
 import {AuthContext} from '../context/AuthContext'
+import {UserContext} from '../context/UserContext'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 
-	const {name, isAdmin, logout, isAuthenticated} =
-		React.useContext(AuthContext)
+	const {logout, isAuthenticated} = React.useContext(AuthContext)
+	const {name, isAdmin} = React.useContext(UserContext)
 	return (
 		<>
 			<HeaderWrapper>

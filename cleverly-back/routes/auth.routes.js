@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
+const AccessKey = require('../models/AccessKey')
 const router = Router()
 
 router.post(
@@ -26,8 +27,8 @@ router.post(
 				})
 			}
 
-			const {name, email, password, isAdmin} = req.body
-
+			const {name, email, password, accessKey} = req.body
+			const key = await AccessKey.findOne({accessKey})
 			const candidate = await User.findOne({email})
 
 			if (candidate) {
@@ -35,11 +36,23 @@ router.post(
 			}
 
 			const hashedPassword = await bcrypt.hash(password, 12)
+			if (!key) {
+				res.status(400).json({
+					message: 'Access key not found'
+				})
+			}
+			if (!key.active) {
+				res.status(400).json({
+					message: 'Access key inactive'
+				})
+			}
+			await AccessKey.updateOne({accessKey}, {active: false})
+
 			const user = new User({
 				name,
 				email,
 				password: hashedPassword,
-				isAdmin
+				isAdmin: key.active || false
 			})
 			await user.save()
 
@@ -55,7 +68,9 @@ router.post(
 router.post(
 	'/login',
 	[
-		check('email', 'Enter correct email').normalizeEmail().isEmail(),
+		check('email', 'Enter correct email')
+			.normalizeEmail({gmail_remove_dots: false})
+			.isEmail(),
 		check('password', 'Enter correct password').exists()
 	],
 	async (req, res) => {

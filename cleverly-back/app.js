@@ -6,7 +6,7 @@ const app = express()
 
 app.use(express.json({extended: true}))
 app.use('/api/auth', require('./routes/auth.routes'))
-app.use('/api/access-keys', require('./routes/auth.routes'))
+app.use('/api/access-keys', require('./routes/access-key.routes'))
 app.use('/api/category', require('./routes/category.routes'))
 app.use('/api/result', require('./routes/result.routes'))
 app.use('/api/test', require('./routes/test.routes'))

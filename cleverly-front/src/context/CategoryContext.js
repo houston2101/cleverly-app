@@ -8,5 +8,7 @@ export const CategoryContext = createContext({
 	setCategories: noop,
 	updateCategories: noop,
 	addCategory: noop,
-	getCategory: noop
+	getCategory: noop,
+	loading: null,
+	error: null
 })

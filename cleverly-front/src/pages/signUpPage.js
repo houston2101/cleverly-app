@@ -8,6 +8,8 @@ import Input from '../components/Input'
 import Button from '../components/Button/Button'
 import ButtonText from '../components/Button/ButtonText'
 import WarningModal from '../sections/WarningModal'
+import ModalCheckbox from '../components/ModalCheckbox/ModalCheckbox'
+import AdminSignUpWrapper from '../components/Form/AdminSignUpWrapper'
 
 const SignUpPage = () => {
 	const {loading, request, error} = useHttp()
@@ -16,19 +18,13 @@ const SignUpPage = () => {
 		email: '',
 		password: '',
 		repeatedPassword: '',
-		isAdmin: false
+		accessKey: null
 	})
 
-	const {
-		title,
-		name,
-		email,
-		password,
-		repeat,
-		signUpButton,
-		logInButton,
-		warningText
-	} = signUpPageData
+	const [isChecked, setIsChecked] = React.useState(false)
+
+	const {title, name, email, password, repeat, signUpButton, logInButton} =
+		signUpPageData
 
 	const handlerSetUserData = (e) => {
 		setUserData({...userData, [e.target.name]: e.target.value})
@@ -84,6 +80,22 @@ const SignUpPage = () => {
 							onChange={handlerSetUserData}
 							placeholder={repeat}
 						/>
+						<AdminSignUpWrapper>
+							<ModalCheckbox
+								text='sign up as admin'
+								value={isChecked}
+								handler={setIsChecked}
+							/>
+							{isChecked && (
+								<Input
+									type='password'
+									name='accessKey'
+									value={userData.accessKey}
+									onChange={handlerSetUserData}
+									placeholder='Enter your access key'
+								/>
+							)}
+						</AdminSignUpWrapper>
 					</>
 				}
 				buttons={

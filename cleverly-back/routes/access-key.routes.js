@@ -14,23 +14,20 @@ router.get('/get', async (req, res) => {
 })
 router.post('/remove', async (req, res) => {
 	try {
-		const {reqAccessKey} = req.body
-		await AccessKey.deleteOne({reqAccessKey})
-		res.json({
-			message: 'Ключ удален'
-		})
+		const {key} = req.body
+		await AccessKey.deleteOne({key})
+		const accessK = await AccessKey.find({})
+		res.json(accessK)
 	} catch (e) {
 		res.status(500).json({message: e.message})
 	}
 })
 router.post('/change-active', async (req, res) => {
 	try {
-		const {reqAccessKey} = req.body
-		const accessK = await AccessKey.findOne({reqAccessKey})
-		await AccessKey.updateOne({reqAccessKey}, {active: !accessK.active})
-		res.json({
-			message: 'Ключ изменен'
-		})
+		const {key} = req.body
+		await AccessKey.updateOne({key}, {active: !accessK.active})
+		const accessK = await AccessKey.find({})
+		res.json(accessK)
 	} catch (e) {
 		res.status(500).json({message: e.message})
 	}
@@ -68,9 +65,8 @@ router.get('/add', async (req, res) => {
 			active: true
 		})
 		await newAccessKey.save()
-		res.json({
-			message: 'Новый ключ создан'
-		})
+		const accessK = await AccessKey.find({})
+		res.json(accessK)
 	} catch (e) {
 		res.status(500).json({
 			message: e.message

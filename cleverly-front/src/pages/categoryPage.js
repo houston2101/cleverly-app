@@ -1,6 +1,5 @@
 import React from 'react'
 import PageGrid from '../sections/PageGrid'
-import categoryData from '../data/en/categoryData'
 import TestCardWrapper from '../components/TestCard/TestCardWrapper'
 import TestCardLink from '../components/TestCard/TestCardLink'
 import TestCardImage from '../components/TestCard/TestCardImage'
@@ -11,6 +10,8 @@ import TestCardDetails from '../components/TestCard/TestCardDetails'
 import {TestContext} from '../context/TestContext'
 import {CategoryContext} from '../context/CategoryContext'
 import {useLocation} from 'react-router-dom'
+import CategoryCardTitle from '../components/CategoryCard/CategoryCardTitle'
+import {UserContext} from '../context/UserContext'
 
 const CategoryPage = () => {
 	const {tests} = React.useContext(TestContext)
@@ -23,30 +24,40 @@ const CategoryPage = () => {
 		setActiveCategory(getCategory(slug))
 	}, [slug, getCategory])
 
+	const {isAdmin} = React.useContext(UserContext)
+
 	return (
 		<PageGrid
 			title={activeCategory.title}
-			content={tests
-				.filter((el) => activeCategory._id === el.category)
-				.map(({_id, title, image, timeLimit, questions}) => (
-					<TestCardWrapper key={_id}>
-						{image && <TestCardImage src={image} />}
-						<TestCardContent>
-							<TestCartTitle>{title}</TestCartTitle>
-							<TestCardDetails>
-								<TestCardText>
-									Questions: {questions.length}
-								</TestCardText>
-								{timeLimit && (
-									<TestCardText>
-										Time limit: {timeLimit}
-									</TestCardText>
-								)}
-							</TestCardDetails>
-							<TestCardLink to={`/test/${_id}`} />
-						</TestCardContent>
+			content={[
+				isAdmin ? (
+					<TestCardWrapper key='default'>
+						<CategoryCardTitle>+</CategoryCardTitle>
+						<TestCardLink to='/constructor' />
 					</TestCardWrapper>
-				))}
+				) : null,
+				...tests
+					.filter((el) => activeCategory._id === el.category)
+					.map(({_id, title, image, timeLimit, questions}) => (
+						<TestCardWrapper key={_id}>
+							{image && <TestCardImage src={image} />}
+							<TestCardContent>
+								<TestCartTitle>{title}</TestCartTitle>
+								<TestCardDetails>
+									<TestCardText>
+										Questions: {questions.length}
+									</TestCardText>
+									{timeLimit && (
+										<TestCardText>
+											Time limit: {timeLimit}
+										</TestCardText>
+									)}
+								</TestCardDetails>
+								<TestCardLink to={`/test/${_id}`} />
+							</TestCardContent>
+						</TestCardWrapper>
+					))
+			]}
 		/>
 	)
 }

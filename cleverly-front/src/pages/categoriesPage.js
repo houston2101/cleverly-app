@@ -7,7 +7,7 @@ import CategoryModal from '../components/CreateCategoryModal/CategoryModal'
 import PageGrid from '../sections/PageGrid'
 import categoriesData from '../data/en/categoriesData'
 import {CategoryContext} from '../context/CategoryContext'
-import {AuthContext} from '../context/AuthContext'
+import {UserContext} from '../context/UserContext'
 
 const CategoriesPage = () => {
 	const {sectionTitle} = categoriesData
@@ -21,7 +21,7 @@ const CategoriesPage = () => {
 		addCategory(title, image)
 	}
 
-	const {isAdmin} = React.useContext(AuthContext)
+	const {isAdmin} = React.useContext(UserContext)
 	return (
 		<>
 			<PageGrid

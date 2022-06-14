@@ -56,7 +56,7 @@ const TestSettings = ({
 									onClick={() =>
 										currentQuestionHandler(el.number)
 									}>
-									{el.number}
+									{el.number + 1}
 								</QuestionaryModalItem>
 								{questions.length > 1 && (
 									<QuestionConstructorDeleteStackItem

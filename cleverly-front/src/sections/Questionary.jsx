@@ -55,110 +55,6 @@ const test = {
 					index: 'D'
 				}
 			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: true,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
 		}
 	]
 }
@@ -170,6 +66,7 @@ const Questionary = () => {
 		countOfCorrectAnswers: null,
 		answers: []
 	})
+	const [activeTest, setActiveTest] = React.useState(test)
 	const [testDone, setTestDone] = React.useState(false)
 	const [activeQuestion, setActiveQuestion] = React.useState(0)
 	const [answeredQuestions, setAnsweredQuestions] = React.useState(

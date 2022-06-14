@@ -1,3 +1,4 @@
+import React from 'react'
 import {Global, ThemeProvider} from '@emotion/react'
 import useAuth from './hooks/auth.hook'
 import SiteRouter from './routes'
@@ -14,50 +15,77 @@ import {TestContext} from './context/TestContext'
 import {ResultContext} from './context/ResultContext'
 import useCategories from './hooks/categories.hook'
 import useTests from './hooks/tests.hook'
+import useUser from './hooks/user.hook'
 
 const App = () => {
-	const {token, login, logout, userId, name, email, isAdmin} = useAuth()
+	const {token, login, logout, userId} = useAuth()
+	const {
+		email,
+		image,
+		name,
+		isAdmin,
+		changePassword,
+		changeImage,
+		changeName,
+		setUser
+	} = useUser()
 	const {
 		categories,
 		setCategories,
 		updateCategories,
 		addCategory,
-		getCategory
+		getCategory,
+		loading,
+		error
 	} = useCategories()
 	const {tests, setTests, updateTests, addTest} = useTests()
 	const isAuthenticated = !!token
+
+	React.useEffect(() => {
+		if (userId) setUser(userId)
+	}, [userId])
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Global styles={[fontLexend, modernNormalize, reboot]} />
 			<AuthContext.Provider
 				value={{
 					token,
-					email,
 					userId,
-					name,
-					isAdmin,
 					login,
 					logout,
 					isAuthenticated
 				}}>
-				<CategoryContext.Provider
+				<UserContext.Provider
 					value={{
-						categories,
-						setCategories,
-						updateCategories,
-						addCategory,
-						getCategory
+						email,
+						image,
+						name,
+						isAdmin,
+						setUser,
+						changePassword,
+						changeName,
+						changeImage
 					}}>
-					<TestContext.Provider
+					<CategoryContext.Provider
 						value={{
-							tests,
-							setTests,
-							updateTests,
-							addTest
+							categories,
+							setCategories,
+							updateCategories,
+							addCategory,
+							getCategory,
+							loading,
+							error
 						}}>
-						<ResultContext.Provider>
-							{isAdmin ? (
-								<UserContext.Provider>
+						<TestContext.Provider
+							value={{
+								tests,
+								setTests,
+								updateTests,
+								addTest
+							}}>
+							<ResultContext.Provider>
+								{isAdmin ? (
 									<Router>
 										<Layout>
 											<SiteRouter
@@ -67,19 +95,21 @@ const App = () => {
 											/>
 										</Layout>
 									</Router>
-								</UserContext.Provider>
-							) : (
-								<Router>
-									<Layout>
-										<SiteRouter
-											isAuthenticated={isAuthenticated}
-										/>
-									</Layout>
-								</Router>
-							)}
-						</ResultContext.Provider>
-					</TestContext.Provider>
-				</CategoryContext.Provider>
+								) : (
+									<Router>
+										<Layout>
+											<SiteRouter
+												isAuthenticated={
+													isAuthenticated
+												}
+											/>
+										</Layout>
+									</Router>
+								)}
+							</ResultContext.Provider>
+						</TestContext.Provider>
+					</CategoryContext.Provider>
+				</UserContext.Provider>
 			</AuthContext.Provider>
 		</ThemeProvider>
 	)

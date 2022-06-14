@@ -1,10 +1,15 @@
 import styled from '@emotion/styled'
 
-const UserAvatar = styled.img`
+const UserAvatar = styled.div`
 	border-radius: ${({theme}) => theme.borderRadius.circle};
 	box-shadow: ${({theme}) => theme.boxShadow.icon};
 	background-color: ${({theme}) => theme.palette.accent.lightBlue};
 	flex-shrink: 0;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 
 	${({theme}) => theme.breakpoints.down('sm')} {
 		width: 45px;
@@ -24,6 +29,12 @@ const UserAvatar = styled.img`
 	${({theme}) => theme.breakpoints.up('2xl')} {
 		width: 125px;
 		height: 125px;
+	}
+
+	& img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
 	}
 `
 
