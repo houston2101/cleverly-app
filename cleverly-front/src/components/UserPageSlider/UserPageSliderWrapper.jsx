@@ -15,7 +15,7 @@ const UserPageSliderWrapper = styled.div`
 		padding: 20px;
 	}
 
-	${({theme}) => theme.breakpoints.up('sm')} {
+	${({theme}) => theme.breakpoints.between('sm', '3xl')} {
 		padding: 30px;
 	}
 

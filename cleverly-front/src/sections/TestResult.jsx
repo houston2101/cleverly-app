@@ -24,7 +24,7 @@ import SendButtonWrapper from '../components/Questionary/SendButtonWrapper'
 import ButtonArrow from '../components/Button/ButtonArrow'
 import {ResultContext} from '../context/ResultContext'
 import {TestContext} from '../context/TestContext'
-import {useLocation} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import Loader from './Loader'
 
 const TestResult = () => {
@@ -49,6 +49,8 @@ const TestResult = () => {
 		if (results) setCurrentResult(results.find(({_id}) => _id === resultId))
 	}, [results])
 
+	document.title = `Cleverly - Результат: ${currentTest?.title}`
+
 	return currentTest ? (
 		<QuestionaryWrapper>
 			<QuestionaryContent>
@@ -66,7 +68,6 @@ const TestResult = () => {
 										({index: answerIdx}) =>
 											answerIdx === index
 									)
-									console.log(thisAnswer)
 									return (
 										<QuestionaryContentQuestionItem
 											isTestDone={true}
@@ -167,7 +168,7 @@ const TestResult = () => {
 					</QuestionaryModalContent>
 				</QuestionaryModal>
 				<SendButtonWrapper>
-					<Button>
+					<Button as={Link} to='/results'>
 						<ButtonText>Back to all results</ButtonText>
 						<ButtonArrow />
 					</Button>

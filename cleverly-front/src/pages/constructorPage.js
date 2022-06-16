@@ -9,6 +9,8 @@ import ChooseCategory from '../components/QuestionConstructor/ChooseCategory/Cho
 import Button from '../components/Button/Button'
 import ButtonText from '../components/Button/ButtonText'
 import {TestContext} from '../context/TestContext'
+import {useNavigate} from 'react-router-dom'
+import {CategoryContext} from '../context/CategoryContext'
 import Loader from '../sections/Loader'
 
 const indexes = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -179,9 +181,15 @@ const ConstructorPage = () => {
 	//! Questions settings
 
 	const {loading, addTest} = React.useContext(TestContext)
-
+	const navigate = useNavigate()
+	const {categories} = React.useContext(CategoryContext)
 	const handlerSaveTest = () => {
 		addTest(test)
+		navigate(
+			`/categories/${
+				categories.find((el) => el._id === test.category).link
+			}`
+		)
 	}
 
 	React.useEffect(() => {

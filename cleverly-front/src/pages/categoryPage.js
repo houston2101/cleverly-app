@@ -42,7 +42,7 @@ const CategoryPage = () => {
 				) : null,
 				...tests
 					.filter((el) => activeCategory._id === el.category)
-					.map(({_id, title, image, timeLimit, questions}) => (
+					.map(({_id, title, image, passingScore, questions}) => (
 						<TestCardWrapper key={_id}>
 							{image && <TestCardImage src={image} />}
 							<TestCardContent>
@@ -51,9 +51,10 @@ const CategoryPage = () => {
 									<TestCardText>
 										Questions: {questions.length}
 									</TestCardText>
-									{timeLimit && (
+									{passingScore && (
 										<TestCardText>
-											Time limit: {timeLimit}
+											Passing score: {passingScore}/
+											{questions.length}
 										</TestCardText>
 									)}
 								</TestCardDetails>

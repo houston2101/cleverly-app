@@ -8,10 +8,6 @@ const HeaderStackItem = styled(Link)`
 
 	${({theme}) => theme.breakpoints.up('md')} {
 		color: ${({theme}) => theme.palette.text.secondary};
-
-		&:last-of-type {
-			display: none;
-		}
 	}
 `
 

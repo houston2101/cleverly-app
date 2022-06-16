@@ -21,7 +21,10 @@ const ChooseCategory = ({category, handlerSetCategory}) => {
 				{categories.map(({title, _id}) => (
 					<CategoryListItem
 						key={_id}
-						onClick={() => handlerSetCategory(_id)}>
+						onClick={() => {
+							handleIsOpen()
+							handlerSetCategory(_id)
+						}}>
 						{title}
 					</CategoryListItem>
 				))}

@@ -15,16 +15,22 @@ import HeaderLogoutIcon from '../components/Header/HeaderLogoutIcon'
 import HeaderAccountItemName from '../components/Header/HeaderAccountItemName'
 import HeaderMenuIcon from '../components/Header/HeaderMenuIcon'
 import HeaderMobileMenu from '../components/Header/HeaderMobileMenu'
+import HeaderUserImage from '../components/Header/HeaderUserImage'
 import HeaderMobileMenuWrapper from '../components/Header/HeaderMobileMenuWrapper'
 import {AuthContext} from '../context/AuthContext'
 import {UserContext} from '../context/UserContext'
+import {useLocation} from 'react-router-dom'
 
 const Header = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
+	const location = useLocation()
+	React.useEffect(() => {
+		setIsOpen(false)
+	}, [location])
 
 	const {logout, isAuthenticated} = React.useContext(AuthContext)
-	const {name, isAdmin} = React.useContext(UserContext)
+	const {name, isAdmin, image} = React.useContext(UserContext)
 	return (
 		<>
 			<HeaderWrapper>
@@ -39,20 +45,35 @@ const Header = () => {
 								<HeaderMobileMenu isOpen={isOpen}>
 									<HeaderMobileMenuWrapper>
 										<HeaderStack>
-											{headerData.headerLinks.map(
-												({label, link}, idx) => (
+											{[
+												...headerData.headerLinks.map(
+													({label, link}, idx) => (
+														<HeaderStackItem
+															to={link}
+															key={idx}>
+															{label}
+														</HeaderStackItem>
+													)
+												),
+												isAdmin ? (
 													<HeaderStackItem
-														to={link}
-														key={idx}>
-														{label}
+														to='/constructor'
+														key='constructor'>
+														Constructor
 													</HeaderStackItem>
-												)
-											)}
+												) : null
+											]}
 										</HeaderStack>
 
 										<HeaderAccountInfo>
 											<HeaderAccountInfoItem to='/'>
-												<HeaderAccountIcon />
+												{image ? (
+													<HeaderUserImage
+														src={image}
+													/>
+												) : (
+													<HeaderAccountIcon />
+												)}
 												<HeaderAccountItemName username>
 													{name}
 												</HeaderAccountItemName>

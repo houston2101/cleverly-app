@@ -92,14 +92,6 @@ const UserSettings = ({name, email, imageSrc}) => {
 		) {
 			changePassword(userId, userPassData.oldPass, userPassData.newPass)
 		} else {
-			console.log(
-				'oldPass: ',
-				userPassData.oldPass,
-				' newPass: ',
-				userPassData.newPass,
-				' repeatedPass: ',
-				userPassData.repeatedPass
-			)
 			console.log('error')
 		}
 	}
@@ -172,7 +164,7 @@ const UserSettings = ({name, email, imageSrc}) => {
 						</ButtonText>
 					</Button>
 				</PasswordSettingsContent>
-				<ThemeToggler isLight={isLight} handle={handleSetIsLight} />
+				{/* <ThemeToggler isLight={isLight} handle={handleSetIsLight} /> */}
 			</PasswordSettingsWrapper>
 		</UserSettingsWrapper>
 	)

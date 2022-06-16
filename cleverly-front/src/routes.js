@@ -8,7 +8,8 @@ import {
 	CategoryPage,
 	CategoriesPage,
 	AllResultsPage,
-	ConstructorPage
+	ConstructorPage,
+	UndefinedPage
 } from './pages'
 
 const SiteRouter = ({isAuthenticated}) => {
@@ -30,7 +31,7 @@ const SiteRouter = ({isAuthenticated}) => {
 					<Route path='/register' element={<SignUpPage />} />
 				</>
 			)}
-			<Route path='/*' element={<div>404</div>} />
+			<Route path='/*' element={<UndefinedPage />} />
 		</Routes>
 	)
 }

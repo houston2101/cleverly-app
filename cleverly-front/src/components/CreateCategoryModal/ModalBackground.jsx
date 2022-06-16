@@ -9,6 +9,7 @@ const ModalBackground = styled.div`
 	z-index: 10;
 	opacity: 0.7;
 	background-color: ${({theme}) => theme.palette.text.primary};
+	left: 0;
 `
 
 export default ModalBackground

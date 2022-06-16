@@ -15,7 +15,6 @@ import DeleteKey from '../components/UserScoreTable/AdminKeySettings/DeleteKey'
 
 const AdminKeysTable = () => {
 	const {accessKeys, addKey, changeKey, removeKey} = useAccessKeys()
-	console.log(accessKeys)
 	return (
 		<UserScoreTableWrapper>
 			<UserResultItem>

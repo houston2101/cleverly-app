@@ -18,6 +18,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import {UserContext} from '../context/UserContext'
 import Loader from './Loader'
+import CategoryModal from '../components/CreateCategoryModal/CategoryModal'
 
 const UserPageStack = styled(Swiper)`
 	width: 100%;
@@ -86,12 +87,19 @@ const UserPageStack = styled(Swiper)`
 `
 
 const UserPageSlider = () => {
-	const {categories, loading} = React.useContext(CategoryContext)
+	const {categories, loading, addCategory} = React.useContext(CategoryContext)
 	const {isAdmin} = React.useContext(UserContext)
+	const [isOpen, setIsOpen] = React.useState(false)
+	const handlerIsOpen = () => setIsOpen(!isOpen)
+
+	const handlerAddCategory = ({title, image}) => {
+		handlerIsOpen()
+		addCategory(title, image)
+	}
 
 	return (
 		<UserPageSliderWrapper>
-			{isAdmin ? <AdminPageAddCategory /> : null}
+			{isAdmin ? <AdminPageAddCategory onClick={handlerIsOpen} /> : null}
 			<UserPageSliderTitle>
 				{userPageSliderData.sliderTitle}
 			</UserPageSliderTitle>
@@ -125,6 +133,12 @@ const UserPageSlider = () => {
 				</UserPageStack>
 			)) ||
 				(loading && <Loader />)}
+			{isAdmin && isOpen ? (
+				<CategoryModal
+					handler={handlerIsOpen}
+					buttonHandler={handlerAddCategory}
+				/>
+			) : null}
 		</UserPageSliderWrapper>
 	)
 }

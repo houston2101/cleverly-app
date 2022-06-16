@@ -15,7 +15,7 @@ const CategoryList = styled.ul`
 	position: absolute;
 	padding: 0 20px;
 	top: 100%;
-	z-index: 2;
+	z-index: 3;
 	width: 100%;
 	max-height: 200px;
 	overflow-y: scroll;

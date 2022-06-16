@@ -47,7 +47,7 @@ const Questionary = ({activeTest, loading}) => {
 		new Array(activeTest.questions.length)
 	)
 
-	const handleSelectAnswer = (index, isCorrect, multipleAllow) => {
+	const handleSelectAnswer = (index, isCorrect, allowMultiSelect) => {
 		const tempQuestions = [...answeredQuestions]
 		const tempAnswer = answeredQuestions[activeQuestion]
 
@@ -55,7 +55,7 @@ const Questionary = ({activeTest, loading}) => {
 			activeQuestion,
 			1,
 			(tempAnswer &&
-				multipleAllow && {
+				allowMultiSelect && {
 					...tempAnswer,
 					answers: tempAnswer.answers.find(
 						(answer) => answer.index === index
@@ -106,7 +106,7 @@ const Questionary = ({activeTest, loading}) => {
 	React.useEffect(() => {
 		const countingResult = () => {
 			const countOfCorrectAnswers = activeTest.questions
-				.map(({number, multipleAllow, answers}) => {
+				.map(({number, answers}) => {
 					const activeAnswer = answeredQuestions[number]
 
 					const countOfSelectedIncorrectAnswers =
@@ -137,8 +137,6 @@ const Questionary = ({activeTest, loading}) => {
 				})
 				.reduce((acc, answer) => acc + answer, 0)
 
-			console.log(countOfCorrectAnswers)
-
 			return {
 				countOfCorrectAnswers: countOfCorrectAnswers,
 				isPassed: countOfCorrectAnswers >= activeTest.passingScore
@@ -157,7 +155,7 @@ const Questionary = ({activeTest, loading}) => {
 	React.useEffect(() => {
 		if (testDone) {
 			addResult(userResult)
-			navigate('/results/')
+			navigate('/results')
 		}
 	}, [userResult])
 
@@ -180,7 +178,7 @@ const Questionary = ({activeTest, loading}) => {
 							<QuestionaryContentQuestionStack>
 								<QuestionaryContentQuestionMark>
 									{activeTest.questions[activeQuestion]
-										.multipleAllow
+										.allowMultiSelect
 										? 'select few answers'
 										: 'select one answer'}
 								</QuestionaryContentQuestionMark>
@@ -200,7 +198,7 @@ const Questionary = ({activeTest, loading}) => {
 												isCorrect,
 												activeTest.questions[
 													activeQuestion
-												].multipleAllow
+												].allowMultiSelect
 											)
 										}>
 										<QuestionaryContentQuestionItemIndex>

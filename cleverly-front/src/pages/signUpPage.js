@@ -30,16 +30,12 @@ const SignUpPage = () => {
 		setUserData({...userData, [e.target.name]: e.target.value})
 	}
 	document.title = `Cleverly - Регистрация`
-	React.useEffect(() => {
-		console.log(error)
-	}, [error])
 
 	const registerHandler = async () => {
 		try {
 			const data = await request('/api/auth/register', 'POST', {
 				...userData
 			})
-			console.log(data)
 		} catch (e) {
 			console.log(e)
 		}

@@ -3,12 +3,12 @@ import styled from '@emotion/styled'
 const PageGridStack = styled.div`
 	display: grid;
 
-	${({theme}) => theme.breakpoints.down('sm')} {
+	${({theme}) => theme.breakpoints.down('md')} {
 		grid-template-columns: 1fr;
 		row-gap: 40px;
 	}
 
-	${({theme}) => theme.breakpoints.between('sm', 'lg')} {
+	${({theme}) => theme.breakpoints.between('md', 'lg')} {
 		grid-template-columns: 1fr 1fr;
 	}
 
