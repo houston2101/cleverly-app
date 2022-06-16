@@ -1,11 +1,19 @@
 import styled from '@emotion/styled'
 import {css} from '@emotion/react'
 
-const dynamicStyle = ({theme, isSelected, isCorrect, isTestDone}) => css`
+const dynamicStyle = ({
+	theme,
+	isSelected,
+	notSelected,
+	isCorrect,
+	isTestDone
+}) => css`
 	${isTestDone
 		? `
 		background-color: ${
-			isCorrect
+			notSelected && !isCorrect
+				? theme.palette.background.primary
+				: isCorrect
 				? theme.palette.accent.lightGreen
 				: theme.palette.accent.lightRed
 		};

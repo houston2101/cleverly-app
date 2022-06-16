@@ -1,5 +1,4 @@
 const {Router} = require('express')
-const config = require('config')
 const AccessKey = require('../models/AccessKey')
 
 const router = Router()
@@ -14,8 +13,8 @@ router.get('/get', async (req, res) => {
 })
 router.post('/remove', async (req, res) => {
 	try {
-		const {key} = req.body
-		await AccessKey.deleteOne({key})
+		const {id} = req.body
+		await AccessKey.findByIdAndDelete(id)
 		const accessK = await AccessKey.find({})
 		res.json(accessK)
 	} catch (e) {
@@ -24,10 +23,10 @@ router.post('/remove', async (req, res) => {
 })
 router.post('/change-active', async (req, res) => {
 	try {
-		const {key} = req.body
-		await AccessKey.updateOne({key}, {active: !accessK.active})
-		const accessK = await AccessKey.find({})
-		res.json(accessK)
+		const {id, active} = req.body
+		await AccessKey.findByIdAndUpdate(id, {active: !active})
+		const accessKeys = await AccessKey.find({})
+		res.json(accessKeys)
 	} catch (e) {
 		res.status(500).json({message: e.message})
 	}

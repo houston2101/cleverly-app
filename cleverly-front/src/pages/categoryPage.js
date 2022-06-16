@@ -24,6 +24,10 @@ const CategoryPage = () => {
 		setActiveCategory(getCategory(slug))
 	}, [slug, getCategory])
 
+	React.useEffect(() => {
+		document.title = `Cleverly - Категория: ${activeCategory.title}`
+	}, [activeCategory])
+
 	const {isAdmin} = React.useContext(UserContext)
 
 	return (

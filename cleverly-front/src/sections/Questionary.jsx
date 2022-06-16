@@ -24,53 +24,27 @@ import QuestionaryContentQuestionBottom from '../components/Questionary/Question
 import QuestionaryModalButtonItem from '../components/Questionary/QuestionaryModalButtonItem'
 import SendButtonWrapper from '../components/Questionary/SendButtonWrapper'
 import ButtonArrow from '../components/Button/ButtonArrow'
+import {AuthContext} from '../context/AuthContext'
+import {ResultContext} from '../context/ResultContext'
+import Loader from './Loader'
+import {useNavigate} from 'react-router-dom'
 
-const test = {
-	title: 'Large Math test',
-	id: '123QWER321',
-	allowEdit: true,
-	questions: [
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		}
-	]
-}
-
-const Questionary = () => {
+const Questionary = ({activeTest, loading}) => {
+	const {userId} = React.useContext(AuthContext)
 	const [userResult, setUserResult] = React.useState({
-		testId: test.id,
-		userId: 'someUserId',
+		testId: activeTest.id,
+		userId: userId,
 		countOfCorrectAnswers: null,
-		answers: []
+		questions: []
 	})
-	const [activeTest, setActiveTest] = React.useState(test)
+
+	const {addResult} = React.useContext(ResultContext)
+	const navigate = useNavigate()
+
 	const [testDone, setTestDone] = React.useState(false)
 	const [activeQuestion, setActiveQuestion] = React.useState(0)
 	const [answeredQuestions, setAnsweredQuestions] = React.useState(
-		new Array(test.questions.length)
+		new Array(activeTest.questions.length)
 	)
 
 	const handleSelectAnswer = (index, isCorrect, multipleAllow) => {
@@ -122,74 +96,121 @@ const Questionary = () => {
 	}
 
 	React.useEffect(() => {
-		console.log('active question', activeQuestion)
-	}, [activeQuestion])
-
-	React.useEffect(() => {
-		console.log(answeredQuestions)
-	}, [answeredQuestions])
-
-	React.useEffect(() => {
 		setUserResult({
 			...userResult,
-			countOfCorrectAnswers: test.questions.map(
-				({number, multipleAllow, answers}) => {
-					userResult.answers.find(({question}) => question === number)
-				}
-			),
-			answers: answeredQuestions
+			testId: activeTest._id
 		})
-	}, [])
+		setAnsweredQuestions(new Array(activeTest.questions.length))
+	}, [activeTest])
+
+	React.useEffect(() => {
+		const countingResult = () => {
+			const countOfCorrectAnswers = activeTest.questions
+				.map(({number, multipleAllow, answers}) => {
+					const activeAnswer = answeredQuestions[number]
+
+					const countOfSelectedIncorrectAnswers =
+						activeAnswer.answers.filter(
+							({isCorrect}) => isCorrect === false
+						).length
+
+					if (
+						activeAnswer.answers.length === 0 &&
+						countOfSelectedIncorrectAnswers !== 0
+					)
+						return 0
+
+					const countOfChosenCorrectedAnswers =
+						activeAnswer.answers.reduce(
+							(acc, answer) => (answer.isCorrect ? acc + 1 : acc),
+							0
+						)
+
+					const countOfCorrectAnswers = answers.reduce(
+						(acc, answer) => (answer.isCorrect ? acc + 1 : acc),
+						0
+					)
+
+					if (countOfChosenCorrectedAnswers === countOfCorrectAnswers)
+						return 1
+					else return 0
+				})
+				.reduce((acc, answer) => acc + answer, 0)
+
+			console.log(countOfCorrectAnswers)
+
+			return {
+				countOfCorrectAnswers: countOfCorrectAnswers,
+				isPassed: countOfCorrectAnswers >= activeTest.passingScore
+			}
+		}
+
+		if (testDone) {
+			setUserResult({
+				...userResult,
+				...countingResult(),
+				questions: answeredQuestions
+			})
+		}
+	}, [testDone])
+
+	React.useEffect(() => {
+		if (testDone) {
+			addResult(userResult)
+			navigate('/results/')
+		}
+	}, [userResult])
 
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<QuestionaryWrapper>
 			{testDone ? (
-				<div>Processing</div>
+				<Loader />
 			) : (
 				<>
 					<QuestionaryContent>
 						<QuestionaryContentQuestion>
 							<QuestionaryContentQuestionText>
-								{test.questions[activeQuestion].text}
+								{activeTest.questions[activeQuestion].text}
 							</QuestionaryContentQuestionText>
 							<QuestionaryContentQuestionStack>
 								<QuestionaryContentQuestionMark>
-									{test.questions[activeQuestion]
+									{activeTest.questions[activeQuestion]
 										.multipleAllow
 										? 'select few answers'
 										: 'select one answer'}
 								</QuestionaryContentQuestionMark>
-								{test.questions[activeQuestion].answers.map(
-									({isCorrect, text, index}) => (
-										<QuestionaryContentQuestionItem
-											key={text}
-											isSelected={answeredQuestions[
-												activeQuestion
-											]?.answers?.find(
-												(answer) =>
-													answer?.index === index
-											)}
-											onClick={() =>
-												handleSelectAnswer(
-													index,
-													isCorrect,
-													test.questions[
-														activeQuestion
-													].multipleAllow
-												)
-											}>
-											<QuestionaryContentQuestionItemIndex>
-												{index}
-											</QuestionaryContentQuestionItemIndex>
-											<QuestionaryContentQuestionItemText>
-												{text}
-											</QuestionaryContentQuestionItemText>
-										</QuestionaryContentQuestionItem>
-									)
-								)}
+								{activeTest.questions[
+									activeQuestion
+								].answers.map(({isCorrect, text, index}) => (
+									<QuestionaryContentQuestionItem
+										key={text}
+										isSelected={answeredQuestions[
+											activeQuestion
+										]?.answers?.find(
+											(answer) => answer?.index === index
+										)}
+										onClick={() =>
+											handleSelectAnswer(
+												index,
+												isCorrect,
+												activeTest.questions[
+													activeQuestion
+												].multipleAllow
+											)
+										}>
+										<QuestionaryContentQuestionItemIndex>
+											{index}
+										</QuestionaryContentQuestionItemIndex>
+										<QuestionaryContentQuestionItemText>
+											{text}
+										</QuestionaryContentQuestionItemText>
+									</QuestionaryContentQuestionItem>
+								))}
 							</QuestionaryContentQuestionStack>
 							<QuestionaryContentQuestionBottom>
 								<Button
@@ -199,7 +220,8 @@ const Questionary = () => {
 										handleSelectQuestion(activeQuestion - 1)
 									}
 									disabled={
-										activeQuestion === 0 || !test.allowEdit
+										activeQuestion === 0 ||
+										!activeTest.allowEdit
 									}>
 									<ButtonArrow />
 									<ButtonText>Prev question</ButtonText>
@@ -211,7 +233,7 @@ const Questionary = () => {
 									}
 									disabled={
 										activeQuestion ===
-										test.questions.length - 1
+										activeTest.questions.length - 1
 									}>
 									<ButtonText>Next question</ButtonText>
 									<ButtonArrow />
@@ -221,7 +243,7 @@ const Questionary = () => {
 					</QuestionaryContent>
 
 					<QuestionaryAside>
-						<QuestionaryTitle>{test.title}</QuestionaryTitle>
+						<QuestionaryTitle>{activeTest.title}</QuestionaryTitle>
 						<QuestionaryModal isOpen={isOpen}>
 							<QuestionaryModalButton onClick={handleIsOpen}>
 								<QuestionaryModalButtonItem />
@@ -231,14 +253,11 @@ const Questionary = () => {
 									<QuestionaryModalInfo>
 										<QuestionaryModalText>
 											Question: {activeQuestion + 1}/
-											{test.questions.length}
-										</QuestionaryModalText>
-										<QuestionaryModalText>
-											Time: 1h 40m
+											{activeTest.questions.length}
 										</QuestionaryModalText>
 									</QuestionaryModalInfo>
 									<QuestionaryModalStack>
-										{test.questions.map((el, idx) => (
+										{activeTest.questions.map((el, idx) => (
 											<QuestionaryModalItem
 												key={idx}
 												isTestDone={false}
@@ -250,7 +269,9 @@ const Questionary = () => {
 															activeQuestion
 														)
 												)}
-												isAllowEdit={test.allowEdit}
+												isAllowEdit={
+													activeTest.allowEdit
+												}
 												isActive={
 													idx === activeQuestion
 												}

@@ -28,31 +28,31 @@ router.post(
 			}
 
 			const {name, email, password, accessKey} = req.body
-			const key = await AccessKey.findOne({accessKey})
+			const key = await AccessKey.findOne({accessKey: accessKey})
 			const candidate = await User.findOne({email})
 
 			if (candidate) {
-				res.status(400).json({message: 'User already exists'})
+				return res.status(400).json({message: 'User already exists'})
 			}
 
 			const hashedPassword = await bcrypt.hash(password, 12)
-			if (!key) {
-				res.status(400).json({
+			if (!key && accessKey !== null) {
+				return res.status(400).json({
 					message: 'Access key not found'
 				})
 			}
-			if (!key.active) {
-				res.status(400).json({
+			if (!key?.active && accessKey !== null) {
+				return res.status(400).json({
 					message: 'Access key inactive'
 				})
 			}
-			await AccessKey.updateOne({accessKey}, {active: false})
+			await AccessKey.updateOne({accessKey: accessKey}, {active: false})
 
 			const user = new User({
 				name,
 				email,
 				password: hashedPassword,
-				isAdmin: key.active || false
+				isAdmin: (key?.active && accessKey !== null) || false
 			})
 			await user.save()
 
@@ -90,13 +90,15 @@ router.post(
 			const user = await User.findOne({email})
 
 			if (!user) {
-				res.status(400).json({message: 'User not found'})
+				return res.status(400).json({message: 'User not found'})
 			}
 
 			const isMatch = await bcrypt.compare(password, user.password)
 
 			if (!isMatch) {
-				res.status(400).json({message: 'Wrong password. Try again'})
+				return res
+					.status(400)
+					.json({message: 'Wrong password. Try again'})
 			}
 
 			const token = jwt.sign({userId: user.id}, config.get('jwtSecret'), {

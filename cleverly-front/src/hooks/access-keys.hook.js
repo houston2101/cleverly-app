@@ -17,9 +17,9 @@ const useAccessKeys = () => {
 	}, [request])
 
 	const removeKey = useCallback(
-		async (key) => {
+		async (id) => {
 			const newKeys = await request('/api/access-keys/remove', 'POST', {
-				key: key
+				id: id
 			})
 			setAccessKeys(newKeys)
 		},
@@ -27,12 +27,13 @@ const useAccessKeys = () => {
 	)
 
 	const changeKey = useCallback(
-		async (key) => {
+		async (id, active) => {
 			const newKeys = await request(
 				'/api/access-keys/change-active',
 				'POST',
 				{
-					key: key
+					id: id,
+					active: active
 				}
 			)
 			setAccessKeys(newKeys)

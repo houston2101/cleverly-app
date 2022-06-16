@@ -7,6 +7,7 @@ const QuestionaryWrapper = styled(Container)`
 	position: relative;
 	padding-top: 15px;
 	padding-bottom: 15px;
+	justify-content: center;
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		flex-direction: column;

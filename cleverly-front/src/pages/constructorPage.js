@@ -8,8 +8,8 @@ import QuestionaryContent from '../components/Questionary/QuestionaryContent'
 import ChooseCategory from '../components/QuestionConstructor/ChooseCategory/ChooseCategory'
 import Button from '../components/Button/Button'
 import ButtonText from '../components/Button/ButtonText'
-import {useHttp} from '../hooks/http.hook'
 import {TestContext} from '../context/TestContext'
+import Loader from '../sections/Loader'
 
 const indexes = ['A', 'B', 'C', 'D', 'E', 'F']
 
@@ -38,8 +38,6 @@ const ConstructorPage = () => {
 		allowEdit: false,
 		category: null,
 		image: null,
-		timeLimit: false,
-		time: null,
 		passingScore: 10,
 		questions: [defaultQuestion(0)]
 	})
@@ -54,14 +52,12 @@ const ConstructorPage = () => {
 	const handlerAllowEdit = (allowEdit) =>
 		setTest({...test, allowEdit: allowEdit})
 
-	const handlerTimeLimit = (timeLimit) =>
-		setTest({...test, timeLimit: timeLimit})
-
-	const handlerTime = (time) => setTest({...test, time: time})
-
 	const handlerSetImage = (image) => setTest({...test, image: image})
 
 	const handlerSetCategory = (id) => setTest({...test, category: id})
+
+	const handlerSetPassingScore = (e) =>
+		setTest({...test, passingScore: e.target.value})
 
 	//! Global Test Settings
 
@@ -188,9 +184,13 @@ const ConstructorPage = () => {
 		addTest(test)
 	}
 
+	React.useEffect(() => {
+		document.title = 'Cleverly - Конструктор: ' + test.title
+	}, [test])
+
 	return (
 		<QuestionaryWrapper>
-			{(loading && <div> Loading </div>) || (
+			{(loading && <Loader />) || (
 				<QuestionaryContent>
 					<QuestionConstructor
 						addNewAnswer={addNewAnswer}
@@ -223,10 +223,8 @@ const ConstructorPage = () => {
 					handlerRemoveQuestion={handlerRemoveQuestion}
 					handlerAllowEdit={handlerAllowEdit}
 					allowEditValue={test.allowEdit}
-					handlerTimeLimit={handlerTimeLimit}
-					timeLimitValue={test.timeLimit}
-					handlerTime={handlerTime}
-					timeValue={test.time}
+					handlerPassingScore={handlerSetPassingScore}
+					passingScore={test.passingScore}
 				/>
 				<Button disabled={loading} onClick={handlerSaveTest}>
 					<ButtonText>Save test</ButtonText>

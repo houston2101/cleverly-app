@@ -13,9 +13,12 @@ import {UserContext} from './context/UserContext'
 import {CategoryContext} from './context/CategoryContext'
 import {TestContext} from './context/TestContext'
 import {ResultContext} from './context/ResultContext'
+import {AllUsersContext} from './context/AllUsersContext'
 import useCategories from './hooks/categories.hook'
 import useTests from './hooks/tests.hook'
 import useUser from './hooks/user.hook'
+import useResults from './hooks/result.hook'
+import useAllUsers from './hooks/all-users.hook'
 
 const App = () => {
 	const {token, login, logout, userId} = useAuth()
@@ -35,15 +38,25 @@ const App = () => {
 		updateCategories,
 		addCategory,
 		getCategory,
-		loading,
 		error
 	} = useCategories()
-	const {tests, setTests, updateTests, addTest} = useTests()
+	const {tests, setTests, updateTests, addTest, loading, getTestById} =
+		useTests()
+	const {results, getResults, getResultsByUserId, getResultById, addResult} =
+		useResults()
+
+	const {users, getUsers} = useAllUsers()
 	const isAuthenticated = !!token
 
 	React.useEffect(() => {
 		if (userId) setUser(userId)
-	}, [userId])
+		if (isAdmin) {
+			getResults()
+			getUsers()
+		} else {
+			getResultsByUserId(userId)
+		}
+	}, [userId, isAdmin])
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -82,19 +95,30 @@ const App = () => {
 								tests,
 								setTests,
 								updateTests,
-								addTest
+								addTest,
+								getTestById
 							}}>
-							<ResultContext.Provider>
+							<ResultContext.Provider
+								value={{
+									results,
+									getResults,
+									getResultsByUserId,
+									getResultById,
+									addResult
+								}}>
 								{isAdmin ? (
-									<Router>
-										<Layout>
-											<SiteRouter
-												isAuthenticated={
-													isAuthenticated
-												}
-											/>
-										</Layout>
-									</Router>
+									<AllUsersContext.Provider
+										value={{users, getUsers}}>
+										<Router>
+											<Layout>
+												<SiteRouter
+													isAuthenticated={
+														isAuthenticated
+													}
+												/>
+											</Layout>
+										</Router>
+									</AllUsersContext.Provider>
 								) : (
 									<Router>
 										<Layout>

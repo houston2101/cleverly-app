@@ -16,8 +16,8 @@ router.get('/get', async (req, res) => {
 
 router.post('/get-by-id', async (req, res) => {
 	try {
-		const testId = req.body
-		const test = await Test.findById(testId)
+		const {id} = req.body
+		const test = await Test.findById(id)
 		res.json(test)
 	} catch (e) {
 		res.status(500).json({

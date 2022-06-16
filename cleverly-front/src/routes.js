@@ -8,7 +8,6 @@ import {
 	CategoryPage,
 	CategoriesPage,
 	AllResultsPage,
-	VerificationPage,
 	ConstructorPage
 } from './pages'
 
@@ -23,10 +22,6 @@ const SiteRouter = ({isAuthenticated}) => {
 					<Route path='/results/:id' element={<TestResultPage />} />
 					<Route path='/categories/:id' element={<CategoryPage />} />
 					<Route path='/test/:id' element={<QuestionaryPage />} />
-					<Route
-						path='/verification'
-						element={<VerificationPage />}
-					/>
 					<Route path='/constructor' element={<ConstructorPage />} />
 				</>
 			) : (

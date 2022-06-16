@@ -11,6 +11,11 @@ const useTests = () => {
 		setTests(data)
 	}
 
+	const getTestById = async (id) => {
+		const data = await request('/api/test/get-by-id', 'POST', {id: id})
+		return data
+	}
+
 	const updateTests = useCallback(() => {
 		getData()
 	}, [])
@@ -30,7 +35,7 @@ const useTests = () => {
 		getData()
 	}, [])
 
-	return {tests, setTests, loading, error, updateTests, addTest}
+	return {tests, setTests, loading, error, updateTests, addTest, getTestById}
 }
 
 export default useTests

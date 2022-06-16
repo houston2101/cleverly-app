@@ -15,7 +15,7 @@ import DeleteKey from '../components/UserScoreTable/AdminKeySettings/DeleteKey'
 
 const AdminKeysTable = () => {
 	const {accessKeys, addKey, changeKey, removeKey} = useAccessKeys()
-
+	console.log(accessKeys)
 	return (
 		<UserScoreTableWrapper>
 			<UserResultItem>
@@ -25,7 +25,7 @@ const AdminKeysTable = () => {
 			</UserResultItem>
 
 			{accessKeys &&
-				accessKeys?.map(({accessKey, active}, index) => (
+				accessKeys?.map(({_id, accessKey, active}, index) => (
 					<UserResultItem key={index}>
 						<UserResultOrder>
 							<UserResultOrderNumber>
@@ -36,9 +36,15 @@ const AdminKeysTable = () => {
 							<UserResultTestName>
 								{accessKey}
 								<AdminKeySettings>
-									<ActivateKey />
-									<DeactivateKey />
-									<DeleteKey />
+									<ActivateKey
+										onClick={() => changeKey(_id, active)}
+										active={!active}
+									/>
+									<DeactivateKey
+										onClick={() => changeKey(_id, active)}
+										active={active}
+									/>
+									<DeleteKey onClick={() => removeKey(_id)} />
 								</AdminKeySettings>
 							</UserResultTestName>
 						</UserResultTests>
@@ -52,7 +58,7 @@ const AdminKeysTable = () => {
 
 			<UserResultItem onClick={addKey}>
 				<UserResultOrder />
-				<UserResultTests>Add new key</UserResultTests>
+				<UserResultTests isButton={true}>Add new key</UserResultTests>
 				<UserResultTime />
 			</UserResultItem>
 		</UserScoreTableWrapper>

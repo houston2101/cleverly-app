@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 
 const Container = styled.div`
 	width: 100%;
+	flex: 1 1 100%;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		padding-left: 20px;

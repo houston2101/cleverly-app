@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import {Link} from 'react-router-dom'
 
-const ResultItem = styled.div`
+const ResultItem = styled(Link)`
 	display: grid;
 	overflow: hidden;
 	background-color: ${({theme}) => theme.palette.background.secondary};

@@ -17,6 +17,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import {UserContext} from '../context/UserContext'
+import Loader from './Loader'
 
 const UserPageStack = styled(Swiper)`
 	width: 100%;
@@ -94,7 +95,7 @@ const UserPageSlider = () => {
 			<UserPageSliderTitle>
 				{userPageSliderData.sliderTitle}
 			</UserPageSliderTitle>
-			{categories && !loading && (
+			{(categories && !loading && (
 				<UserPageStack
 					modules={[Navigation, Pagination]}
 					spaceBetween={20}
@@ -122,7 +123,8 @@ const UserPageSlider = () => {
 						</SwiperSlide>
 					))}
 				</UserPageStack>
-			)}
+			)) ||
+				(loading && <Loader />)}
 		</UserPageSliderWrapper>
 	)
 }

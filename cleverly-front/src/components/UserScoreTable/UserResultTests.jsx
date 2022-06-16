@@ -7,6 +7,18 @@ const UserResultOrder = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	overflow: hidden;
+
+	${({isButton}) =>
+		isButton
+			? `justify-content: center;
+		align-items: center;
+		padding: 5px 10px;
+		cursor: pointer;
+		&:hover
+		{
+			text-decoration: underline
+		}`
+			: ''}
 `
 
 export default UserResultOrder

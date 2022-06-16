@@ -13,7 +13,7 @@ const CategoriesPage = () => {
 	const {sectionTitle} = categoriesData
 	const [isOpen, setIsOpen] = React.useState(false)
 	const {categories, addCategory} = React.useContext(CategoryContext)
-
+	document.title = `Cleverly - Категории`
 	const handlerIsOpen = () => setIsOpen(!isOpen)
 
 	const handlerAddCategory = ({title, image}) => {

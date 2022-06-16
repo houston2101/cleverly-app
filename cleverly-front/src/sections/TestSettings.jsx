@@ -10,6 +10,7 @@ import QuestionaryModalItem from '../components/Questionary/QuestionaryModalItem
 import ModalCheckbox from '../components/ModalCheckbox/ModalCheckbox'
 import QuestionaryModalItemWrapper from '../components/Questionary/QuestionaryModalItemWrapper'
 import QuestionConstructorDeleteStackItem from '../components/QuestionConstructor/QuestionConstructorDeleteStackItem'
+import Input from '../components/Input'
 
 const TestSettings = ({
 	questions,
@@ -19,10 +20,8 @@ const TestSettings = ({
 	handlerRemoveQuestion,
 	handlerAllowEdit,
 	allowEditValue,
-	handlerTimeLimit,
-	timeLimitValue,
-	handlerTime,
-	timeValue
+	handlerPassingScore,
+	passingScoreValue
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
@@ -40,10 +39,11 @@ const TestSettings = ({
 							value={allowEditValue}
 							handler={handlerAllowEdit}
 						/>
-						<ModalCheckbox
-							text='Set time limit'
-							value={timeLimitValue}
-							handler={handlerTimeLimit}
+						<Input
+							type='number'
+							placeholder='passing score'
+							value={passingScoreValue}
+							onChange={handlerPassingScore}
 						/>
 					</QuestionaryModalInfo>
 					<QuestionaryModalStack>

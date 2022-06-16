@@ -5,6 +5,7 @@ const FlexContainer = styled(Container)`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex: 1 1 100%;
 
 	${({theme}) => theme.breakpoints.down('xl')} {
 		flex-direction: column;

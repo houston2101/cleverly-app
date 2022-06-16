@@ -22,178 +22,78 @@ import QuestionaryModalWrapper from '../components/Questionary/QuestionaryModalW
 import QuestionaryModalButtonItem from '../components/Questionary/QuestionaryModalButtonItem'
 import SendButtonWrapper from '../components/Questionary/SendButtonWrapper'
 import ButtonArrow from '../components/Button/ButtonArrow'
-
-const test = {
-	title: 'Large Math test',
-	id: '123QWER321',
-	allowEdit: false,
-	questions: [
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		},
-		{
-			text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-			multipleAllow: false,
-			answers: [
-				{
-					isCorrect: false,
-					text: 'On the other hand, we denounce with righteous',
-					index: 'A'
-				},
-				{
-					isCorrect: false,
-					text: 'indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment',
-					index: 'B'
-				},
-				{
-					isCorrect: false,
-					text: 'so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue;',
-					index: 'C'
-				},
-				{
-					isCorrect: true,
-					text: 'The wise man therefore always holds in these matters to this principle',
-					index: 'D'
-				}
-			]
-		}
-	]
-}
+import {ResultContext} from '../context/ResultContext'
+import {TestContext} from '../context/TestContext'
+import {useLocation} from 'react-router-dom'
+import Loader from './Loader'
 
 const TestResult = () => {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const handleIsOpen = () => setIsOpen(!isOpen)
+	const resultId = useLocation().pathname.split('/').pop()
 
-	return (
+	const {results} = React.useContext(ResultContext)
+	const {tests} = React.useContext(TestContext)
+
+	const [currentTest, setCurrentTest] = React.useState(null)
+	const [currentResult, setCurrentResult] = React.useState(null)
+
+	React.useEffect(() => {
+		if (currentResult)
+			setCurrentTest(
+				tests.find((test) => test._id === currentResult.testId)
+			)
+	}, [currentResult])
+
+	React.useEffect(() => {
+		if (results) setCurrentResult(results.find(({_id}) => _id === resultId))
+	}, [results])
+
+	return currentTest ? (
 		<QuestionaryWrapper>
 			<QuestionaryContent>
-				{test.questions.map(({answers, text}) => (
-					<QuestionaryContentQuestion>
-						<QuestionaryContentQuestionText>
-							{text}
-						</QuestionaryContentQuestionText>
-						<QuestionaryContentQuestionStack>
-							{answers.map(({isCorrect, text, index}) => (
-								<QuestionaryContentQuestionItem
-									isTestDone={true}
-									isCorrect={isCorrect}
-									key={text}>
-									<QuestionaryContentQuestionItemIndex>
-										{index}
-									</QuestionaryContentQuestionItemIndex>
-									<QuestionaryContentQuestionItemText>
-										{text}
-									</QuestionaryContentQuestionItemText>
-								</QuestionaryContentQuestionItem>
-							))}
-						</QuestionaryContentQuestionStack>
-					</QuestionaryContentQuestion>
-				))}
+				{currentTest.questions.map(({answers, number, text}) => {
+					return (
+						<QuestionaryContentQuestion key={number}>
+							<QuestionaryContentQuestionText>
+								{text}
+							</QuestionaryContentQuestionText>
+							<QuestionaryContentQuestionStack>
+								{answers.map(({isCorrect, text, index}) => {
+									const thisAnswer = currentResult.questions[
+										number
+									].answers.find(
+										({index: answerIdx}) =>
+											answerIdx === index
+									)
+									console.log(thisAnswer)
+									return (
+										<QuestionaryContentQuestionItem
+											isTestDone={true}
+											notSelected={!thisAnswer}
+											isCorrect={
+												thisAnswer
+													? thisAnswer.isCorrect
+													: isCorrect
+											}
+											key={text}>
+											<QuestionaryContentQuestionItemIndex>
+												{index}
+											</QuestionaryContentQuestionItemIndex>
+											<QuestionaryContentQuestionItemText>
+												{text}
+											</QuestionaryContentQuestionItemText>
+										</QuestionaryContentQuestionItem>
+									)
+								})}
+							</QuestionaryContentQuestionStack>
+						</QuestionaryContentQuestion>
+					)
+				})}
 			</QuestionaryContent>
 
 			<QuestionaryAside>
-				<QuestionaryTitle>{test.title}</QuestionaryTitle>
+				<QuestionaryTitle>{currentTest.title}</QuestionaryTitle>
 				<QuestionaryModal isOpen={isOpen}>
 					<QuestionaryModalButton onClick={handleIsOpen}>
 						<QuestionaryModalButtonItem />
@@ -201,19 +101,67 @@ const TestResult = () => {
 					<QuestionaryModalContent>
 						<QuestionaryModalWrapper>
 							<QuestionaryModalInfo>
-								<QuestionaryModalText>1</QuestionaryModalText>
 								<QuestionaryModalText>
-									Time: 1h 40m
+									{currentResult.isPassed
+										? 'Тест пройден'
+										: 'Тест не пройден'}
+								</QuestionaryModalText>
+								<QuestionaryModalText>
+									Кол-во правильных ответов:{' '}
+									{currentResult.countOfCorrectAnswers}/
+									{currentTest.questions.length}
 								</QuestionaryModalText>
 							</QuestionaryModalInfo>
 							<QuestionaryModalStack>
-								{test.questions.map((el, idx) => (
-									<QuestionaryModalItem
-										isTestDone={true}
-										key={idx}>
-										{idx + 1}
-									</QuestionaryModalItem>
-								))}
+								{currentTest.questions.map(
+									({_id, answers, number}, idx) => {
+										const activeAnswer =
+											currentResult.questions[number]
+
+										const countOfSelectedIncorrectAnswers =
+											activeAnswer.answers.filter(
+												({isCorrect}) =>
+													isCorrect === false
+											).length
+
+										if (
+											activeAnswer.answers.length === 0 &&
+											countOfSelectedIncorrectAnswers !==
+												0
+										)
+											return 0
+
+										const countOfChosenCorrectedAnswers =
+											activeAnswer.answers.reduce(
+												(acc, answer) =>
+													answer.isCorrect
+														? acc + 1
+														: acc,
+												0
+											)
+
+										const countOfCorrectAnswers =
+											answers.reduce(
+												(acc, answer) =>
+													answer.isCorrect
+														? acc + 1
+														: acc,
+												0
+											)
+
+										return (
+											<QuestionaryModalItem
+												isTestDone={true}
+												isCorrect={
+													countOfChosenCorrectedAnswers ===
+													countOfCorrectAnswers
+												}
+												key={idx}>
+												{idx + 1}
+											</QuestionaryModalItem>
+										)
+									}
+								)}
 							</QuestionaryModalStack>
 						</QuestionaryModalWrapper>
 					</QuestionaryModalContent>
@@ -226,6 +174,8 @@ const TestResult = () => {
 				</SendButtonWrapper>
 			</QuestionaryAside>
 		</QuestionaryWrapper>
+	) : (
+		<Loader />
 	)
 }
 

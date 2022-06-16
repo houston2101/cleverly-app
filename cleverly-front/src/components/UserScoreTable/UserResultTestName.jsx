@@ -9,6 +9,8 @@ const UserResultTestName = styled.span`
 	white-space: nowrap;
 	overflow: hidden;
 	width: 100%;
+	display: flex;
+	gap: 15px;
 
 	${({theme}) => theme.breakpoints.down('lg')} {
 		font-size: 16px;

@@ -35,7 +35,7 @@ const LoginPage = () => {
 			console.log(e)
 		}
 	}
-
+	document.title = `Cleverly - Вход`
 	return (
 		<>
 			<StartPageBackground />

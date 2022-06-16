@@ -9,7 +9,9 @@ import AdminKeysTable from '../sections/AdminKeysTable'
 
 const UserPage = () => {
 	const {name, email, image, isAdmin} = React.useContext(UserContext)
-
+	document.title = `Cleverly - ${
+		isAdmin ? 'Кабинет администратора' : 'Кабинет пользователя'
+	}`
 	return (
 		<FlexContainer>
 			<UserSettings name={name} email={email} imageSrc={image} />

@@ -3,9 +3,7 @@ const {Schema, model, Types} = require('mongoose')
 const schema = new Schema({
 	title: {type: String, required: true, unique: true},
 	allowEdit: {type: Boolean, required: true},
-	timeLimit: {type: Boolean, required: true},
-	time: {type: Number},
-	passingScore: {type: Number, required: true, default: '100%'},
+	passingScore: {type: Number, required: true, default: '10'},
 	category: {type: Types.ObjectId, ref: 'Category'},
 	image: {type: String},
 	questions: [

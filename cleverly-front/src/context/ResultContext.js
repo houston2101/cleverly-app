@@ -4,6 +4,8 @@ const noop = () => {}
 
 export const ResultContext = createContext({
 	results: [],
-	setResults: noop,
-	updateResults: noop
+	getResults: noop,
+	getResultsByUserId: noop,
+	getResultById: noop,
+	addResult: noop
 })

@@ -17,6 +17,17 @@ router.post('/get-by-id', async (req, res) => {
 	}
 })
 
+router.get('/get', async (req, res) => {
+	try {
+		const users = await User.find()
+		res.json(users)
+	} catch (e) {
+		res.status(500).json({
+			message: 'Something went wrong. Please try again.'
+		})
+	}
+})
+
 router.post(
 	'/update-password',
 	[

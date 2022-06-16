@@ -6,5 +6,6 @@ export const TestContext = createContext({
 	tests: [],
 	setTests: noop,
 	updateTests: noop,
-	addTest: noop
+	addTest: noop,
+	getTestById: noop
 })

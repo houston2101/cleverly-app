@@ -17,6 +17,8 @@ const Main = styled.main`
 	position: relative;
 	padding-top: 50px;
 	padding-bottom: 50px;
+	align-items: center;
+	justify-content: center;
 
 	${({theme}) => theme.breakpoints.down('md')} {
 		min-height: calc(100vh - 50px);

@@ -29,7 +29,7 @@ const SignUpPage = () => {
 	const handlerSetUserData = (e) => {
 		setUserData({...userData, [e.target.name]: e.target.value})
 	}
-
+	document.title = `Cleverly - Регистрация`
 	React.useEffect(() => {
 		console.log(error)
 	}, [error])
